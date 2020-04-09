@@ -122,7 +122,7 @@ MonoBehaviour:
   speed: 10
   jumpForce: 15
   jumpGravity: 3.5
-  normalGravity: 10
+  normalGravity: 7
 --- !u!95 &820933682
 Animator:
   serializedVersion: 3
