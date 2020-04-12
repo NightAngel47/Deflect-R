@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject deflectDirectionCircle;
     private bool timeFrozen;
     private IEnumerator coroutine;
+    private bool freezeTimeCoroutineStopped;
 
     void Awake()
     {
@@ -47,6 +48,7 @@ public class PlayerMovement : MonoBehaviour
         SetTimeFrozen(false);
 
         coroutine = FreezeTimeDuration();
+        freezeTimeCoroutineStopped = false;
     }
 
     // Update is called once per frame
@@ -59,6 +61,17 @@ public class PlayerMovement : MonoBehaviour
             Vector2 mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
             float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
             deflectDirectionCircle.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle + 90));
+
+            if (Input.GetButtonDown("Fire1"))
+            {
+                if (!freezeTimeCoroutineStopped)
+                {
+                    freezeTimeCoroutineStopped = true;
+                    StopCoroutine(coroutine);
+                    UnfreezeTime();
+                    DeflectPlayer();
+                }
+            }
         }
         else
         {
@@ -160,9 +173,11 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     private void FreezeTime()
     {
+        _canJump = false;
         deflectDirectionCircle.SetActive(true);
         SetTimeFrozen(true);
         coroutine = FreezeTimeDuration();
+        _rigidbody2D.velocity = new Vector2(0,0);
         StartCoroutine(coroutine);
     }
 
@@ -172,6 +187,7 @@ public class PlayerMovement : MonoBehaviour
     private void UnfreezeTime()
     {
         Time.timeScale = 1;
+        freezeTimeCoroutineStopped = false;
         deflectDirectionCircle.SetActive(false);
         SetTimeFrozen(false);
     }
@@ -203,6 +219,11 @@ public class PlayerMovement : MonoBehaviour
     public bool GetTimeFrozen()
     {
         return timeFrozen;
+    }
+
+    private void DeflectPlayer()
+    {
+        //TODO
     }
 
     private void OnCollisionEnter2D(Collision2D other)
