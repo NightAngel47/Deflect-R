@@ -676,6 +676,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1223657191 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1841754093, guid: 99d88c1a48759744ea3eb8a790943ccc,
+    type: 3}
+  m_PrefabInstance: {fileID: 883306742440783229}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1705281928
 GameObject:
   m_ObjectHideFlags: 0
@@ -960,7 +966,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865050138}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.00000047683716, y: 0.49000013, z: -10}
+  m_LocalPosition: {x: -0.00000071525574, y: 0.49000013, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1072,6 +1078,11 @@ PrefabInstance:
       propertyPath: timeFreezeMaxDuration
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5080836215505147859, guid: 99d88c1a48759744ea3eb8a790943ccc,
+        type: 3}
+      propertyPath: deflectDirectionArrow
+      value: 
+      objectReference: {fileID: 1223657191}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99d88c1a48759744ea3eb8a790943ccc, type: 3}
 --- !u!1001 &8644729539744939649
@@ -1089,7 +1100,7 @@ PrefabInstance:
     - target: {fileID: 8644729539703486618, guid: f80f26a5a3f20664989ecaa9220ec434,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.00000047683716
+      value: -0.00000071525574
       objectReference: {fileID: 0}
     - target: {fileID: 8644729539703486618, guid: f80f26a5a3f20664989ecaa9220ec434,
         type: 3}

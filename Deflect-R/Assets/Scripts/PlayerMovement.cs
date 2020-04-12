@@ -223,7 +223,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void DeflectPlayer()
     {
-        //TODO
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 difference = mousePos - gameObject.transform.position;
+        difference.z = 0;
+        difference.Normalize();
+        _rigidbody2D.velocity = new Vector3(difference.x * 30f, difference.y * 30f);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
