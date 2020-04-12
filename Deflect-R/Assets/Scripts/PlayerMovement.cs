@@ -29,6 +29,9 @@ public class PlayerMovement : MonoBehaviour
     private static readonly int Moving = Animator.StringToHash("Moving");
     private static readonly int InAir = Animator.StringToHash("InAir");
 
+    public GameObject deflectDirectionCircle;
+    private bool timeFrozen;
+
     void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -36,42 +39,55 @@ public class PlayerMovement : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
 
         dashRadius = detectionZone.GetComponent<DashRadius>();
+
+        deflectDirectionCircle.SetActive(false);
+        SetTimeFrozen(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        // store x input for movement
-        _xInput = Input.GetAxis("Horizontal");
-
-        // handle sprite flip and animation
-        if (Input.GetButton("Horizontal"))
+        if(GetTimeFrozen())
         {
-            _spriteRenderer.flipX = !(_xInput > 0);
+            Vector2 positionOnScreen = Camera.main.WorldToViewportPoint(deflectDirectionCircle.transform.position);
+            Vector2 mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
+            float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
+            deflectDirectionCircle.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle + 90));
         }
-        _animator.SetBool(Moving, Input.GetButton("Horizontal"));
-
-         // handles player press jump 
-        if (_canJump && (Input.GetButtonDown("Jump") || (Input.GetButtonDown("Vertical") && Input.GetAxis("Vertical") > 0)))
+        else
         {
-            _canJump = false;
-            _rigidbody2D.gravityScale = jumpGravity;
-            _rigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            
-            _animator.SetBool(InAir, true);
-        }
+            // store x input for movement
+            _xInput = Input.GetAxis("Horizontal");
 
-        // handles player release jump
-        if (!_canJump && _rigidbody2D.gravityScale != normalGravity && (Input.GetButtonUp("Jump") || (Input.GetButtonUp("Vertical") && Input.GetAxis("Vertical") > 0)))
-        {
-            _rigidbody2D.gravityScale = normalGravity;
-        }
-
-        if(Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            if(dashRadius.FindClosestObject() != null)
+            // handle sprite flip and animation
+            if (Input.GetButton("Horizontal"))
             {
-                DashToBullet(dashRadius.FindClosestObject());
+                _spriteRenderer.flipX = !(_xInput > 0);
+            }
+            _animator.SetBool(Moving, Input.GetButton("Horizontal"));
+
+            // handles player press jump 
+            if (_canJump && (Input.GetButtonDown("Jump") || (Input.GetButtonDown("Vertical") && Input.GetAxis("Vertical") > 0)))
+            {
+                _canJump = false;
+                _rigidbody2D.gravityScale = jumpGravity;
+                _rigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+
+                _animator.SetBool(InAir, true);
+            }
+
+            // handles player release jump
+            if (!_canJump && _rigidbody2D.gravityScale != normalGravity && (Input.GetButtonUp("Jump") || (Input.GetButtonUp("Vertical") && Input.GetAxis("Vertical") > 0)))
+            {
+                _rigidbody2D.gravityScale = normalGravity;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                if (dashRadius.FindClosestObject() != null)
+                {
+                    DashToBullet(dashRadius.FindClosestObject());
+                }
             }
         }
     }
@@ -80,6 +96,11 @@ public class PlayerMovement : MonoBehaviour
     {
         // applies x input movement
         _rigidbody2D.velocity = new Vector2(_xInput * speed, _rigidbody2D.velocity.y);
+    }
+
+    private float AngleBetweenTwoPoints(Vector3 a, Vector3 b)
+    {
+        return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
     }
 
     /// <summary>
@@ -96,6 +117,7 @@ public class PlayerMovement : MonoBehaviour
         if (CanDash(direction, Mathf.Infinity))
         {
             transform.position = projectileTransform.position;
+            FreezeTime();
         }
     }
 
@@ -118,6 +140,31 @@ public class PlayerMovement : MonoBehaviour
         {
             return false;
         }
+    }
+
+    private void FreezeTime()
+    {
+        SetTimeFrozen(true);
+        Time.timeScale = 0;
+    }
+
+    private void SetTimeFrozen(bool freezeTime)
+    {
+        timeFrozen = freezeTime;
+
+        if(timeFrozen)
+        {
+            deflectDirectionCircle.SetActive(true);
+        }
+        else if(!timeFrozen)
+        {
+            deflectDirectionCircle.SetActive(false);
+        }
+    }
+
+    public bool GetTimeFrozen()
+    {
+        return timeFrozen;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
