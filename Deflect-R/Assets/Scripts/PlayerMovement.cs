@@ -10,6 +10,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField, Tooltip("The force that the player jumps with"), Range(1, 50)] private float jumpForce = 1;
     [SerializeField, Tooltip("The gravity scale the player has when jumping"), Range(-20, 20)] private float jumpGravity = 0.5f;
     [SerializeField, Tooltip("The gravity scale the player has when falling/grounded"), Range(-20, 20)] private float normalGravity = 1f;
+    [SerializeField, Tooltip("The radius that the player may dash to objects in")] public GameObject detectionZone;
+
+    // dash variables
+    private DashRadius dashRadius;
+    public LayerMask undashableLayer;
 
     // component references
     private Rigidbody2D _rigidbody2D;
@@ -29,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        dashRadius = detectionZone.GetComponent<DashRadius>();
     }
 
     // Update is called once per frame
@@ -59,12 +66,58 @@ public class PlayerMovement : MonoBehaviour
         {
             _rigidbody2D.gravityScale = normalGravity;
         }
+
+        if(Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            if(dashRadius.FindClosestObject() != null)
+            {
+                DashToBullet(dashRadius.FindClosestObject());
+            }
+        }
     }
 
     private void FixedUpdate()
     {
         // applies x input movement
         _rigidbody2D.velocity = new Vector2(_xInput * speed, _rigidbody2D.velocity.y);
+    }
+
+    /// <summary>
+    /// If the player can dash to a projectile, moves the player to that projectile
+    /// </summary>
+    /// <param name="projectileTransform"></param>
+    private void DashToBullet(Transform projectileTransform)
+    {
+        Vector3 direction = transform.position - projectileTransform.position;
+        float dashMagnitude = direction.sqrMagnitude;
+
+        //Debug.DrawRay(transform.position, -direction, Color.green, dashMagnitude, false);
+
+        if (CanDash(direction, Mathf.Infinity))
+        {
+            transform.position = projectileTransform.position;
+        }
+    }
+
+    /// <summary>
+    /// Determines if there is an object inbetween the player and the target projectile
+    /// that the player is unable to dash through. 
+    /// </summary>
+    /// <param name="dashDirection"></param>
+    /// <param name="dashDistance"></param>
+    /// <returns></returns>
+    private bool CanDash(Vector3 dashDirection, float dashDistance)
+    {
+        RaycastHit2D rayHit = Physics2D.Raycast(transform.position, -dashDirection, dashDistance, undashableLayer);
+
+        if (rayHit.collider == null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
