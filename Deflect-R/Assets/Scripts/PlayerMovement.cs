@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     private static readonly int Moving = Animator.StringToHash("Moving");
     private static readonly int InAir = Animator.StringToHash("InAir");
 
+    // time freeze variables
     public GameObject deflectDirectionCircle;
     private bool timeFrozen;
     private IEnumerator coroutine;
@@ -51,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // if time is frozen, rotate the deflect direction circle with mouse movement
         if(GetTimeFrozen())
         {
             Vector2 positionOnScreen = Camera.main.WorldToViewportPoint(deflectDirectionCircle.transform.position);
@@ -90,6 +92,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (dashRadius.FindClosestObject() != null)
                 {
+                    // dashes player to the closest projectile
                     DashToBullet(dashRadius.FindClosestObject());
                 }
             }
@@ -102,9 +105,15 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody2D.velocity = new Vector2(_xInput * speed, _rigidbody2D.velocity.y);
     }
 
-    private float AngleBetweenTwoPoints(Vector3 a, Vector3 b)
+    /// <summary>
+    /// Finds the angle between two points in degrees
+    /// </summary>
+    /// <param name="objectPosOnScreen"></param>
+    /// <param name="mousePos"></param>
+    /// <returns></returns>
+    private float AngleBetweenTwoPoints(Vector3 objectPosOnScreen, Vector3 mousePos)
     {
-        return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
+        return Mathf.Atan2(objectPosOnScreen.y - mousePos.y, objectPosOnScreen.x - mousePos.x) * Mathf.Rad2Deg;
     }
 
     /// <summary>
@@ -146,6 +155,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Initiates freezing time
+    /// </summary>
     private void FreezeTime()
     {
         deflectDirectionCircle.SetActive(true);
@@ -154,6 +166,9 @@ public class PlayerMovement : MonoBehaviour
         StartCoroutine(coroutine);
     }
 
+    /// <summary>
+    /// Initiates unfreezing time
+    /// </summary>
     private void UnfreezeTime()
     {
         Time.timeScale = 1;
@@ -161,6 +176,10 @@ public class PlayerMovement : MonoBehaviour
         SetTimeFrozen(false);
     }
 
+    /// <summary>
+    /// Unfreezes time after the time freeze's max duration is reached
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator FreezeTimeDuration()
     {
         Time.timeScale = 0;
@@ -168,11 +187,19 @@ public class PlayerMovement : MonoBehaviour
         UnfreezeTime();
     }
 
+    /// <summary>
+    /// Setter function for time freeze
+    /// </summary>
+    /// <param name="freezeTime"></param>
     private void SetTimeFrozen(bool freezeTime)
     {
         timeFrozen = freezeTime;
     }
 
+    /// <summary>
+    /// Getter function for time freeze
+    /// </summary>
+    /// <returns></returns>
     public bool GetTimeFrozen()
     {
         return timeFrozen;
