@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField, Tooltip("The gravity scale the player has when jumping"), Range(-20, 20)] private float jumpGravity = 0.5f;
     [SerializeField, Tooltip("The gravity scale the player has when falling/grounded"), Range(-20, 20)] private float normalGravity = 1f;
     [SerializeField, Tooltip("The radius that the player may dash to objects in")] public GameObject detectionZone;
+    [SerializeField, Tooltip("The max time the player may be frozen in time for before time unfreezes")] public float timeFreezeMaxDuration = 2f;
 
     // dash variables
     private DashRadius dashRadius;
@@ -31,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject deflectDirectionCircle;
     private bool timeFrozen;
+    private IEnumerator coroutine;
 
     void Awake()
     {
@@ -42,6 +44,8 @@ public class PlayerMovement : MonoBehaviour
 
         deflectDirectionCircle.SetActive(false);
         SetTimeFrozen(false);
+
+        coroutine = FreezeTimeDuration();
     }
 
     // Update is called once per frame
@@ -114,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
 
         //Debug.DrawRay(transform.position, -direction, Color.green, dashMagnitude, false);
 
-        if (CanDash(direction, Mathf.Infinity))
+        if (CanDash(direction, dashMagnitude))
         {
             transform.position = projectileTransform.position;
             FreezeTime();
@@ -144,22 +148,29 @@ public class PlayerMovement : MonoBehaviour
 
     private void FreezeTime()
     {
+        deflectDirectionCircle.SetActive(true);
         SetTimeFrozen(true);
+        coroutine = FreezeTimeDuration();
+        StartCoroutine(coroutine);
+    }
+
+    private void UnfreezeTime()
+    {
+        Time.timeScale = 1;
+        deflectDirectionCircle.SetActive(false);
+        SetTimeFrozen(false);
+    }
+
+    private IEnumerator FreezeTimeDuration()
+    {
         Time.timeScale = 0;
+        yield return new WaitForSecondsRealtime(timeFreezeMaxDuration);
+        UnfreezeTime();
     }
 
     private void SetTimeFrozen(bool freezeTime)
     {
         timeFrozen = freezeTime;
-
-        if(timeFrozen)
-        {
-            deflectDirectionCircle.SetActive(true);
-        }
-        else if(!timeFrozen)
-        {
-            deflectDirectionCircle.SetActive(false);
-        }
     }
 
     public bool GetTimeFrozen()
