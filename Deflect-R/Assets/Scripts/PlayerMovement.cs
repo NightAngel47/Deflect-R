@@ -71,9 +71,15 @@ public class PlayerMovement : MonoBehaviour
         // if time is frozen, rotate the deflect direction circle with mouse movement
         if(GetTimeFrozen())
         {
-            Vector2 positionOnScreen = Camera.main.WorldToViewportPoint(deflectDirectionCircle.transform.position);
+            float centerHeight = Screen.height / 2;
+            float centerWidth = Screen.width / 2;
+
+            Vector2 screenCenter = new Vector2(centerWidth, centerHeight);
+            Vector2 screenViewPort = (Vector2)Camera.main.ScreenToViewportPoint(screenCenter);
+
             Vector2 mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
-            float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
+
+            float angle = AngleBetweenTwoPoints(screenViewPort, mouseOnScreen);
             deflectDirectionCircle.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle + 90));
 
             if (Input.GetButtonDown("Fire1"))
