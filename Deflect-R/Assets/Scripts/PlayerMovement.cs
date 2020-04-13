@@ -25,12 +25,14 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
+    private Collider2D _collider;
     
     // movement variables
     private float _xInput;
     private bool _canJump = true;
     
     // animation variables
+    [SerializeField, Tooltip("The x offset for the collider, used for when the sprite flips")] private float xOffsetForCollider = 0.4f;
     private static readonly int Moving = Animator.StringToHash("Moving");
     private static readonly int InAir = Animator.StringToHash("InAir");
 
@@ -45,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _collider = GetComponent<Collider2D>();
 
         dashRadius = detectionZone.GetComponent<DashRadius>();
 
@@ -89,6 +92,10 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetButton("Horizontal"))
             {
                 _spriteRenderer.flipX = !(_xInput > 0);
+
+                var colliderOffset = _collider.offset;
+                colliderOffset.x = _xInput > 0 ? xOffsetForCollider : -xOffsetForCollider;
+                _collider.offset = colliderOffset;
             }
             _animator.SetBool(Moving, Input.GetButton("Horizontal"));
 
