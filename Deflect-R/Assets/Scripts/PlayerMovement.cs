@@ -6,8 +6,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     // tweakable variables
-    [SerializeField, Tooltip("The speed the player moves at"), Range(1, 50)] private float speed = 1;
-    [SerializeField, Tooltip("The force that the player jumps with"), Range(1, 50)] private float jumpForce = 1;
+    [SerializeField, Tooltip("The speed the player moves at"), Range(1, 500)] private float speed = 1;
+    [SerializeField, Tooltip("The force that the player jumps with"), Range(1, 500)] private float jumpForce = 1;
     [SerializeField, Tooltip("The gravity scale the player has when jumping"), Range(-20, 20)] private float jumpGravity = 0.5f;
     [SerializeField, Tooltip("The gravity scale the player has when falling/grounded"), Range(-20, 20)] private float normalGravity = 1f;
     [SerializeField, Tooltip("The radius that the player may dash to objects in")] public GameObject detectionZone;
@@ -19,7 +19,6 @@ public class PlayerMovement : MonoBehaviour
     
     // deflect variables
     [SerializeField, Tooltip("The force that is applied to the player on deflect")] private Vector2 deflectForce = new Vector2(15f, 30f);
-    private bool _moveNormal = true;
 
     // component references
     private Rigidbody2D _rigidbody2D;
@@ -30,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
     // movement variables
     private float _xInput;
     private bool _canJump = true;
+    [SerializeField, Tooltip("The drag on the player walking")] private float normalDrag = 5;
+    [SerializeField, Tooltip("The drag on the player in the air")] private float airDrag = 0;
     
     // animation variables
     [SerializeField, Tooltip("The x offset for the collider, used for when the sprite flips")] private float xOffsetForCollider = 0.4f;
@@ -58,6 +59,12 @@ public class PlayerMovement : MonoBehaviour
         freezeTimeCoroutineStopped = false;
     }
 
+    private void Start()
+    {
+        _rigidbody2D.gravityScale = normalGravity;
+        _rigidbody2D.drag = normalDrag;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -83,10 +90,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             // store x input for movement
-            if (_moveNormal)
-            {
-                _xInput = Input.GetAxis("Horizontal");
-            }
+            _xInput = Input.GetAxis("Horizontal");
 
             // handle sprite flip and animation
             if (Input.GetButton("Horizontal"))
@@ -104,6 +108,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 _canJump = false;
                 _rigidbody2D.gravityScale = jumpGravity;
+                _rigidbody2D.drag = airDrag;
                 _rigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
 
                 _animator.SetBool(InAir, true);
@@ -113,6 +118,7 @@ public class PlayerMovement : MonoBehaviour
             if (!_canJump && _rigidbody2D.gravityScale != normalGravity && (Input.GetButtonUp("Jump") || (Input.GetButtonUp("Vertical") && Input.GetAxis("Vertical") > 0)))
             {
                 _rigidbody2D.gravityScale = normalGravity;
+                _rigidbody2D.drag = normalDrag;
             }
 
             if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -131,10 +137,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         // applies x input movement
-        if (_moveNormal)
-        {
-            _rigidbody2D.velocity = new Vector2(_xInput * speed, _rigidbody2D.velocity.y);
-        }
+        _rigidbody2D.AddForce(Vector2.right * (_xInput * speed));
     }
 
     /// <summary>
@@ -246,8 +249,8 @@ public class PlayerMovement : MonoBehaviour
         Vector3 difference = mousePos - gameObject.transform.position;
         difference.z = 0;
         difference.Normalize();
-        //_rigidbody2D.velocity = new Vector3(difference.x * 30f, difference.y * 30f);
-        _moveNormal = false;
+        _rigidbody2D.gravityScale = jumpGravity;
+        _rigidbody2D.drag = airDrag;
         _rigidbody2D.AddForce(new Vector2(difference.x, difference.y) * deflectForce, ForceMode2D.Impulse);
     }
 
@@ -257,7 +260,7 @@ public class PlayerMovement : MonoBehaviour
         if (!_canJump)
         {
             _canJump = true;
-            _moveNormal = true;
+            _rigidbody2D.drag = normalDrag;
             _rigidbody2D.gravityScale = normalGravity;
             _animator.SetBool(InAir, false);
         }
