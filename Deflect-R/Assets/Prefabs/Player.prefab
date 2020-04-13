@@ -400,9 +400,11 @@ MonoBehaviour:
   jumpGravity: 3.5
   normalGravity: 7
   detectionZone: {fileID: 1779782591}
+  timeFreezeMaxDuration: 2
   undashableLayer:
     serializedVersion: 2
     m_Bits: 256
+  deflectForce: 15
   deflectDirectionCircle: {fileID: 1718538437}
 --- !u!95 &820933682
 Animator:

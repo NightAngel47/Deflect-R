@@ -18,7 +18,7 @@ public class DashRadius : MonoBehaviour
     {
         if(FindClosestObject() != null)
         {
-            Debug.Log("Closest Object " + FindClosestObject().gameObject.name);
+            //Debug.Log("Closest Object " + FindClosestObject().gameObject.name);
         }
     }
 

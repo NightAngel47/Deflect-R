@@ -16,6 +16,10 @@ public class PlayerMovement : MonoBehaviour
     // dash variables
     private DashRadius dashRadius;
     public LayerMask undashableLayer;
+    
+    // deflect variables
+    [SerializeField, Tooltip("The force that is applied to the player on deflect")] private float deflectForce = 30f;
+    private bool _moveNormal = true;
 
     // component references
     private Rigidbody2D _rigidbody2D;
@@ -76,7 +80,10 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             // store x input for movement
-            _xInput = Input.GetAxis("Horizontal");
+            if (_moveNormal)
+            {
+                _xInput = Input.GetAxis("Horizontal");
+            }
 
             // handle sprite flip and animation
             if (Input.GetButton("Horizontal"))
@@ -110,12 +117,17 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
+        
+        print(_rigidbody2D.velocity);
     }
 
     private void FixedUpdate()
     {
         // applies x input movement
-        _rigidbody2D.velocity = new Vector2(_xInput * speed, _rigidbody2D.velocity.y);
+        if (_moveNormal)
+        {
+            _rigidbody2D.velocity = new Vector2(_xInput * speed, _rigidbody2D.velocity.y);
+        }
     }
 
     /// <summary>
@@ -227,7 +239,9 @@ public class PlayerMovement : MonoBehaviour
         Vector3 difference = mousePos - gameObject.transform.position;
         difference.z = 0;
         difference.Normalize();
-        _rigidbody2D.velocity = new Vector3(difference.x * 30f, difference.y * 30f);
+        //_rigidbody2D.velocity = new Vector3(difference.x * 30f, difference.y * 30f);
+        _moveNormal = false;
+        _rigidbody2D.AddForce(new Vector2(difference.x, difference.y) * deflectForce, ForceMode2D.Impulse);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -236,6 +250,7 @@ public class PlayerMovement : MonoBehaviour
         if (!_canJump)
         {
             _canJump = true;
+            _moveNormal = true;
             _rigidbody2D.gravityScale = normalGravity;
             _animator.SetBool(InAir, false);
         }
