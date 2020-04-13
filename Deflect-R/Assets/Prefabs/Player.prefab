@@ -404,7 +404,7 @@ MonoBehaviour:
   undashableLayer:
     serializedVersion: 2
     m_Bits: 256
-  deflectForce: {x: 15, y: 15}
+  deflectForce: {x: 15, y: 25}
   normalDrag: 3
   airDrag: 0
   xOffsetForCollider: 0.4
