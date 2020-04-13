@@ -404,7 +404,7 @@ MonoBehaviour:
   undashableLayer:
     serializedVersion: 2
     m_Bits: 256
-  deflectForce: 15
+  deflectForce: {x: 15, y: 15}
   deflectDirectionCircle: {fileID: 1718538437}
 --- !u!95 &820933682
 Animator:

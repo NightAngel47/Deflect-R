@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask undashableLayer;
     
     // deflect variables
-    [SerializeField, Tooltip("The force that is applied to the player on deflect")] private float deflectForce = 30f;
+    [SerializeField, Tooltip("The force that is applied to the player on deflect")] private Vector2 deflectForce = new Vector2(15f, 30f);
     private bool _moveNormal = true;
 
     // component references
