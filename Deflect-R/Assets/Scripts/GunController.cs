@@ -56,8 +56,9 @@ public class GunController : MonoBehaviour
             Vector2 gunPos = gameObject.transform.position;
             Vector2 playerPos = player.transform.position;
 
-            Vector2 bulletDirection = -(gunPos - playerPos).normalized * bulletSpeed * Time.deltaTime; //Get the Vector2 towards the player
-            GameObject newBullet = Instantiate(bullet, gunPos, Quaternion.identity, gameObject.transform); //Make a bullet
+            Vector2 bulletDirection = -(gunPos - playerPos).normalized; //Get the Vector2 towards the player
+            GameObject newBullet = Instantiate(bullet, gunPos + bulletDirection, Quaternion.identity, gameObject.transform); //Make a bullet
+            bulletDirection *= bulletSpeed * Time.deltaTime;
             newBullet.GetComponent<Rigidbody2D>().velocity = bulletDirection; //Send it towards the player
             Destroy(newBullet, bulletDestroyTimer); //Destroy bullets after X time to prevent infinity bullets
             print("Bullet spawned!");
