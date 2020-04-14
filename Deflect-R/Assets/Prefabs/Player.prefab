@@ -395,16 +395,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab8d002a256b5e8409e69b08f1c47c97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  speed: 11
   jumpForce: 15
   jumpGravity: 3.5
   normalGravity: 7
   detectionZone: {fileID: 1779782591}
   timeFreezeMaxDuration: 2
+  dashCooldown: 0.3
   undashableLayer:
     serializedVersion: 2
     m_Bits: 256
-  deflectForce: {x: 15, y: 25}
+  deflectForce: {x: 25, y: 25}
   normalDrag: 3
   airDrag: 0
   xOffsetForCollider: 0.4

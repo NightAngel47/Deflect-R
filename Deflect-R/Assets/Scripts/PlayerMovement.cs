@@ -12,10 +12,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField, Tooltip("The gravity scale the player has when falling/grounded"), Range(-20, 20)] private float normalGravity = 1f;
     [SerializeField, Tooltip("The radius that the player may dash to objects in")] public GameObject detectionZone;
     [SerializeField, Tooltip("The max time the player may be frozen in time for before time unfreezes")] public float timeFreezeMaxDuration = 2f;
+    [SerializeField, Tooltip("The time that a player must wait after dashing before dashing again.")] public float dashCooldown;
 
     // dash variables
     private DashRadius dashRadius;
     public LayerMask undashableLayer;
+    private bool dashCooled;
     
     // deflect variables
     [SerializeField, Tooltip("The force that is applied to the player on deflect")] private Vector2 deflectForce = new Vector2(15f, 30f);
@@ -59,6 +61,8 @@ public class PlayerMovement : MonoBehaviour
 
         coroutine = FreezeTimeDuration();
         freezeTimeCoroutineStopped = false;
+
+        dashCooled = true;
     }
 
     private void Start()
@@ -70,10 +74,23 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (dashCooled)
+        {
+            transform.rotation = Quaternion.identity;
+            _spriteRenderer.flipY = false;
+            _animator.SetBool("Slashing", false);
+        }
+        else
+        {
+            _animator.SetBool("Slashing", true);
+        }
+
         // if time is frozen, rotate the deflect direction circle with mouse movement
         // deflection circle points towards the mouse position from the center of the screen
         if (GetTimeFrozen())
         {
+
+
             // determines the angle between the center of the screen and the mouse position
             Vector2 positionOnScreen = Camera.main.WorldToViewportPoint(deflectDirectionCircle.transform.position);
             Vector2 mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
@@ -99,14 +116,13 @@ public class PlayerMovement : MonoBehaviour
             _xInput = Input.GetAxis("Horizontal");
 
             // handle sprite flip and animation
-            if (Input.GetButton("Horizontal"))
-            {
-                _spriteRenderer.flipX = !(_xInput > 0);
+            if (_rigidbody2D.velocity.x != 0 && dashCooled)
+            _spriteRenderer.flipX = !(_rigidbody2D.velocity.x > 0);
 
-                var colliderOffset = _collider.offset;
-                colliderOffset.x = _xInput > 0 ? xOffsetForCollider : -xOffsetForCollider;
-                _collider.offset = colliderOffset;
-            }
+            var colliderOffset = _collider.offset;
+            colliderOffset.x = _xInput > 0 ? xOffsetForCollider : -xOffsetForCollider;
+            _collider.offset = colliderOffset;
+            
             _animator.SetBool(Moving, Input.GetButton("Horizontal"));
 
             // handles player press jump 
@@ -145,7 +161,8 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         // applies x input movement
-        _rigidbody2D.AddForce(Vector2.right * (_xInput * speed));
+        if (dashCooled)
+        _rigidbody2D.velocity = new Vector3 (_xInput * speed, _rigidbody2D.velocity.y, 0);
     }
 
     /// <summary>
@@ -188,8 +205,10 @@ public class PlayerMovement : MonoBehaviour
     {
         RaycastHit2D rayHit = Physics2D.Raycast(transform.position, -dashDirection, dashDistance, undashableLayer);
 
-        if (rayHit.collider == null)
+        if (rayHit.collider == null && dashCooled)
         {
+            dashCooled = false;
+            Invoke("CoolDash", dashCooldown);
             return true;
         }
         else
@@ -198,11 +217,19 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void CoolDash()
+    {
+        dashCooled = true;
+    }
+
     /// <summary>
     /// Initiates freezing time
     /// </summary>
     private void FreezeTime()
     {
+        //animates the player drawing the sword
+        _animator.SetBool("Drawing", true);
+
         _canJump = false;
         deflectDirectionCircle.SetActive(true);
         SetTimeFrozen(true);
@@ -216,6 +243,8 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     private void UnfreezeTime()
     {
+        _animator.SetBool("Drawing", false);
+
         Time.timeScale = 1;
         freezeTimeCoroutineStopped = false;
         deflectDirectionCircle.SetActive(false);
@@ -268,6 +297,12 @@ public class PlayerMovement : MonoBehaviour
 
         //Adds the deflection force to the player
         _rigidbody2D.AddForce(new Vector2(difference.x, difference.y) * deflectForce, ForceMode2D.Impulse);
+
+        _spriteRenderer.flipY = _rigidbody2D.velocity.x < 0;
+        _spriteRenderer.flipX = false;
+        //_spriteRenderer.flipX = _rigidbody2D.velocity.x < 0;
+;
+        transform.rotation = Quaternion.AngleAxis((Mathf.Atan2(_rigidbody2D.velocity.y, _rigidbody2D.velocity.x) * Mathf.Rad2Deg), Vector3.forward);
 
         //Deflect bullet in opposite direction from the player's deflection
         closestBullet.gameObject.GetComponent<ProjectileBehavior>().DefleftProjectile(-(new Vector2(difference.x, difference.y) * deflectForce));

@@ -92,6 +92,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: Drawing
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: Slashing
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -3586032635199776961}
   m_Solo: 0
@@ -234,6 +237,12 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: InAir
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: Drawing
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: Slashing
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7007672310916455360}
   m_Solo: 0
@@ -258,6 +267,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: Slashing
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: Drawing
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8104719767480397327}
