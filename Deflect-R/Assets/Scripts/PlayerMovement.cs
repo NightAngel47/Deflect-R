@@ -71,11 +71,15 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         // if time is frozen, rotate the deflect direction circle with mouse movement
-        if(GetTimeFrozen())
+        // deflection circle points towards the mouse position from the center of the screen
+        if (GetTimeFrozen())
         {
+            // determines the angle between the center of the screen and the mouse position
             Vector2 positionOnScreen = Camera.main.WorldToViewportPoint(deflectDirectionCircle.transform.position);
             Vector2 mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
             float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
+
+            // rotate the deflection circle towards the mouse position
             deflectDirectionCircle.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle + 90));
 
             if (Input.GetButtonDown("Fire1"))
@@ -247,15 +251,25 @@ public class PlayerMovement : MonoBehaviour
         return timeFrozen;
     }
 
+    /// <summary>
+    /// Determines the direction to deflect the player in and deflects the player
+    /// </summary>
     private void DeflectPlayer()
     {
+        //Deflect player in the direction of the mouse
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 difference = mousePos - gameObject.transform.position;
         difference.z = 0;
         difference.Normalize();
+
+        //Sets gravity to jump gravity
         _rigidbody2D.gravityScale = jumpGravity;
         _rigidbody2D.drag = airDrag;
+
+        //Adds the deflection force to the player
         _rigidbody2D.AddForce(new Vector2(difference.x, difference.y) * deflectForce, ForceMode2D.Impulse);
+
+        //Deflect bullet in opposite direction from the player's deflection
         closestBullet.gameObject.GetComponent<ProjectileBehavior>().DefleftProjectile(-(new Vector2(difference.x, difference.y) * deflectForce));
     }
 

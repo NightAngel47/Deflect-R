@@ -2,23 +2,18 @@
 
 public class ProjectileBehavior : MonoBehaviour
 {
-    Rigidbody2D rb;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float deflectMultiplier = 1f;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    private Rigidbody2D rb
 
+    /// <summary>
+    /// Moves the projectile in the opposite direction from which the player teleports
+    /// </summary>
+    /// <param name="deflectForce"></param>
     public void DefleftProjectile(Vector2 deflectForce)
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = deflectForce;
-        Debug.Log("wowj");
+        rb.velocity = deflectForce * deflectMultiplier;
+        Debug.Log("wow");
     }
 }
