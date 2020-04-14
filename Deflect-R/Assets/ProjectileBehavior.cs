@@ -4,7 +4,7 @@ public class ProjectileBehavior : MonoBehaviour
 {
     public float deflectMultiplier = 1f;
 
-    private Rigidbody2D rb
+    private Rigidbody2D rb;
 
     /// <summary>
     /// Moves the projectile in the opposite direction from which the player teleports
