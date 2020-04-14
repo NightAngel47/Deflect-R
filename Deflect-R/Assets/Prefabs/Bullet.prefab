@@ -133,3 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eb941fdadd03cd47a6418e317a8be51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileLaunchForce: 10
+  deflectMultiplier: 1
+  lifeTime: 5

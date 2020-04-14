@@ -216,6 +216,7 @@ GameObject:
   - component: {fileID: 2100207407}
   - component: {fileID: 2100207406}
   - component: {fileID: 2100207405}
+  - component: {fileID: 2100207409}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Player
@@ -334,6 +335,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2100207409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100207404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab8d002a256b5e8409e69b08f1c47c97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  jumpForce: 1
+  jumpGravity: 0.5
+  normalGravity: 1
+  detectionZone: {fileID: 0}
+  timeFreezeMaxDuration: 2
+  undashableLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  deflectForce: {x: 15, y: 30}
+  normalDrag: 5
+  airDrag: 0
+  xOffsetForCollider: 0.4
+  deflectDirectionCircle: {fileID: 0}
 --- !u!1001 &8635452776677871233
 PrefabInstance:
   m_ObjectHideFlags: 0
