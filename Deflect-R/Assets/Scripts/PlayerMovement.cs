@@ -43,6 +43,8 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator coroutine;
     private bool freezeTimeCoroutineStopped;
 
+    private Transform closestBullet;
+
     void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -125,8 +127,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (dashRadius.FindClosestObject() != null)
                 {
+                    closestBullet = dashRadius.FindClosestObject();
+
                     // dashes player to the closest projectile
-                    DashToBullet(dashRadius.FindClosestObject());
+                    DashToBullet(closestBullet);
                 }
             }
         }
@@ -252,6 +256,7 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody2D.gravityScale = jumpGravity;
         _rigidbody2D.drag = airDrag;
         _rigidbody2D.AddForce(new Vector2(difference.x, difference.y) * deflectForce, ForceMode2D.Impulse);
+        closestBullet.gameObject.GetComponent<ProjectileBehavior>().DefleftProjectile(-(new Vector2(difference.x, difference.y) * deflectForce));
     }
 
     private void OnCollisionEnter2D(Collision2D other)
