@@ -31,13 +31,7 @@ public class AudioManager : MonoBehaviour
     {
         //DontDestroyOnLoad(gameObject);
         instance = this;
-    }
 
-    /// <summary>
-    /// Instantiates Audio Source components for each GameSound 
-    /// </summary>
-    protected void Start()
-    {
         foreach (GameSoundEffect gs in gameSounds)
         {
             settingSource = gameObject.AddComponent<AudioSource>();
@@ -45,9 +39,18 @@ public class AudioManager : MonoBehaviour
             settingSource.volume = gs.volume;
             settingSource.pitch = gs.pitch;
             settingSource.loop = gs.loop;
+            settingSource.playOnAwake = false;
 
             gs.source = settingSource;
         }
+    }
+
+    /// <summary>
+    /// Instantiates Audio Source components for each GameSound 
+    /// </summary>
+    protected void Start()
+    {
+
     }
 
     /// <summary>

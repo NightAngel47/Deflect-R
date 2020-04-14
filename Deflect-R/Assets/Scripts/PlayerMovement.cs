@@ -89,8 +89,6 @@ public class PlayerMovement : MonoBehaviour
         // deflection circle points towards the mouse position from the center of the screen
         if (GetTimeFrozen())
         {
-
-
             // determines the angle between the center of the screen and the mouse position
             Vector2 positionOnScreen = Camera.main.WorldToViewportPoint(deflectDirectionCircle.transform.position);
             Vector2 mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
@@ -128,6 +126,7 @@ public class PlayerMovement : MonoBehaviour
             // handles player press jump 
             if (_canJump && (Input.GetButtonDown("Jump") || (Input.GetButtonDown("Vertical") && Input.GetAxis("Vertical") > 0)))
             {
+                AudioManager.instance.PlaySound("Jump");
                 _canJump = false;
                 _rigidbody2D.gravityScale = jumpGravity;
                 _rigidbody2D.drag = airDrag;
@@ -163,6 +162,11 @@ public class PlayerMovement : MonoBehaviour
         // applies x input movement
         if (dashCooled)
         _rigidbody2D.velocity = new Vector3 (_xInput * speed, _rigidbody2D.velocity.y, 0);
+
+        if (_canJump && _rigidbody2D.velocity.x != 0)
+            AudioManager.instance.PlaySound("Footstep");
+        else
+            AudioManager.instance.StopSound("Footstep");
     }
 
     /// <summary>
@@ -269,6 +273,8 @@ public class PlayerMovement : MonoBehaviour
     private void SetTimeFrozen(bool freezeTime)
     {
         timeFrozen = freezeTime;
+        AudioManager.instance.PlaySound("Draw");
+        AudioManager.instance.PlaySound("Heartbeat");
     }
 
     /// <summary>
@@ -285,6 +291,9 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     private void DeflectPlayer()
     {
+        AudioManager.instance.StopSound("Heartbeat");
+        AudioManager.instance.StopSound("Draw");
+
         //Deflect player in the direction of the mouse
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 difference = mousePos - gameObject.transform.position;
@@ -304,6 +313,8 @@ public class PlayerMovement : MonoBehaviour
 ;
         transform.rotation = Quaternion.AngleAxis((Mathf.Atan2(_rigidbody2D.velocity.y, _rigidbody2D.velocity.x) * Mathf.Rad2Deg), Vector3.forward);
 
+        AudioManager.instance.PlaySound("Slash");
+
         //Deflect bullet in opposite direction from the player's deflection
         closestBullet.gameObject.GetComponent<ProjectileBehavior>().DefleftProjectile(-(new Vector2(difference.x, difference.y) * deflectForce));
     }
@@ -313,6 +324,7 @@ public class PlayerMovement : MonoBehaviour
         // resets jump and animation
         if (!_canJump)
         {
+            AudioManager.instance.PlaySound("Land");
             _canJump = true;
             _rigidbody2D.drag = normalDrag;
             _rigidbody2D.gravityScale = normalGravity;
