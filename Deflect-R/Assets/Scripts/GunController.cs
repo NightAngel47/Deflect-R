@@ -4,37 +4,35 @@ using UnityEngine;
 
 public class GunController : MonoBehaviour
 {
-    GameObject player;
+    Transform player;
     public GameObject bullet;
 
     public float aggroRange; //How close the player has to be before the enemy starts attacking
-    public float timeUntilFire; //Time it takes for the enemy to fire once the player enters their range
+    //public float timeUntilFire; //Time it takes for the enemy to fire once the player enters their range
     public float timeBetweenFire; //Time between successive attacks if the player remains in the enemy's range
-    public float bulletSpeed; //How fast the bullets move
-    public float bulletDestroyTimer; //After how many seconds should the bullet destroy itself
+    //public float bulletSpeed; //How fast the bullets move
+    //public float bulletDestroyTimer; //After how many seconds should the bullet destroy itself
 
-    Vector2 bulletDirection; //The direction the bullet will move in
-    float distanceFrom; //The enemy's disance from the player
+    //Vector2 bulletDirection; //The direction the bullet will move in
+    //float distanceFrom; //The enemy's disance from the player
     bool firing; //Whether or not the enemy is firing 
 
     // Start is called before the first frame update
     void Start()
     {
-        //player = FindObjectOfType<PlayerMovement>().gameObject;
-        if(GameObject.FindGameObjectWithTag("Player") != null)
-        {
-            player = GameObject.FindGameObjectWithTag("Player");
-            print("Found player!");
-        }
+        player = FindObjectOfType<PlayerMovement>().transform;
+        print("Found player!");
     }
-
-    void FixedUpdate()
+    
+    void Update()
     {
-        distanceFrom = Vector2.Distance(transform.position, player.transform.position);
+        float distanceFrom = Vector2.Distance(transform.position, player.transform.position);
         if(distanceFrom < aggroRange && !firing) //If the player is close enough and the enemy isn't yet firing
         {
             firing = true;
-            Invoke("Fire", timeUntilFire);
+            //Invoke("Fire", timeUntilFire);
+            StartCoroutine(FireBullets());
+            
 
             //start firing
             print("Start Firing!");
@@ -48,7 +46,32 @@ public class GunController : MonoBehaviour
         }
     }
 
+    private IEnumerator FireBullets()
+    {
+        yield return new WaitForSeconds(timeBetweenFire);
+        SpawnBullet();
+
+        if (firing)
+        {
+            StartCoroutine(FireBullets());
+        }
+    }
+
+    private void SpawnBullet()
+    {
+        var gunPos = transform.position;
+        var playerPos = player.position;
+        
+        Vector3 bulletDirection = (gunPos - playerPos).normalized; //Get the Vector2 towards the player
+        
+        ProjectileBehavior newBullet = Instantiate(bullet, gunPos - bulletDirection, Quaternion.identity).GetComponent<ProjectileBehavior>();
+        newBullet.FireProjectile(-bulletDirection);
+        
+        print("Bullet spawned!");
+    }
+
     //Every X seconds fire a projectile @ the player
+    /*
     void Fire()
     {
         if(firing)
@@ -57,7 +80,7 @@ public class GunController : MonoBehaviour
             Vector2 playerPos = player.transform.position;
 
             Vector2 bulletDirection = -(gunPos - playerPos).normalized; //Get the Vector2 towards the player
-            GameObject newBullet = Instantiate(bullet, gunPos + bulletDirection, Quaternion.identity, gameObject.transform); //Make a bullet
+            GameObject newBullet = Instantiate(bullet, gunPos + bulletDirection, Quaternion.identity); //Make a bullet
             bulletDirection *= bulletSpeed * Time.deltaTime;
             newBullet.GetComponent<Rigidbody2D>().velocity = bulletDirection; //Send it towards the player
             Destroy(newBullet, bulletDestroyTimer); //Destroy bullets after X time to prevent infinity bullets
@@ -70,4 +93,5 @@ public class GunController : MonoBehaviour
             print("Target out of range!");
         }
     }
+    */
 }
