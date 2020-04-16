@@ -255,6 +255,7 @@ public class PlayerMovement : MonoBehaviour
         freezeTimeCoroutineStopped = false;
         deflectDirectionCircle.SetActive(false);
         SetTimeFrozen(false);
+        DeflectPlayer();
     }
 
     /// <summary>
