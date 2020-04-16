@@ -233,6 +233,8 @@ public class PlayerMovement : MonoBehaviour
     {
         //animates the player drawing the sword
         _animator.SetBool("Drawing", true);
+        AudioManager.instance.PlaySound("Draw");
+        AudioManager.instance.PlaySound("Heartbeat");
 
         _canJump = false;
         deflectDirectionCircle.SetActive(true);
@@ -273,8 +275,6 @@ public class PlayerMovement : MonoBehaviour
     private void SetTimeFrozen(bool freezeTime)
     {
         timeFrozen = freezeTime;
-        AudioManager.instance.PlaySound("Draw");
-        AudioManager.instance.PlaySound("Heartbeat");
     }
 
     /// <summary>

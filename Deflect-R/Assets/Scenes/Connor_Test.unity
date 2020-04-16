@@ -1077,6 +1077,23 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 802298801, guid: 99d88c1a48759744ea3eb8a790943ccc, type: 3}
+      propertyPath: gameSounds.Array.data[5].loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1841754094, guid: 99d88c1a48759744ea3eb8a790943ccc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1841754094, guid: 99d88c1a48759744ea3eb8a790943ccc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1841754095, guid: 99d88c1a48759744ea3eb8a790943ccc, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e9de665c87b313b42bd0e02a4dd4b438,
+        type: 3}
     - target: {fileID: 883306742158301516, guid: 99d88c1a48759744ea3eb8a790943ccc,
         type: 3}
       propertyPath: m_Name
@@ -1216,5 +1233,10 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 820933683}
+    - target: {fileID: 8644729539703486619, guid: f80f26a5a3f20664989ecaa9220ec434,
+        type: 3}
+      propertyPath: m_Lens.OrthographicSize
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f80f26a5a3f20664989ecaa9220ec434, type: 3}
