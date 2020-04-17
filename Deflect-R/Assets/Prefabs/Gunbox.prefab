@@ -77,7 +77,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -123,7 +123,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 7592741777047333828, guid: 8d013b0942e901946855c0ad62c1aff1, type: 3}
   aggroRange: 10
-  timeUntilFire: 1.5
   timeBetweenFire: 1.5
-  bulletSpeed: 400
-  bulletDestroyTimer: 5
