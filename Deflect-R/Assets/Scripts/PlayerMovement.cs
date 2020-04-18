@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -330,6 +331,14 @@ public class PlayerMovement : MonoBehaviour
             _rigidbody2D.drag = normalDrag;
             _rigidbody2D.gravityScale = normalGravity;
             _animator.SetBool(InAir, false);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "OutOfBounds")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }
