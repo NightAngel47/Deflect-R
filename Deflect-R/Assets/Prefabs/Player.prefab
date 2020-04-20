@@ -86,7 +86,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - soundName: Heartbeat
     clip: {fileID: 8300000, guid: 28322d8900ca02c488c32725027269db, type: 3}
-    loop: 0
+    loop: 1
     interruptable: 0
     volume: 1
     pitch: 1
@@ -319,7 +319,7 @@ Transform:
   m_GameObject: {fileID: 1841754093}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.68, z: 0}
-  m_LocalScale: {x: 0.17, y: 0.47, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1718538438}
   m_RootOrder: 0
@@ -363,7 +363,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a8bfd18f0c4cd884d9f4b650d5175bac, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e9de665c87b313b42bd0e02a4dd4b438, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

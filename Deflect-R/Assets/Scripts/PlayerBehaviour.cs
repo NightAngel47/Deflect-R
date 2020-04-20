@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerBehaviour : MonoBehaviour
 {
     // tweakable variables
     [SerializeField, Tooltip("The speed the player moves at"), Range(1, 500)] private float speed = 1;
@@ -155,7 +155,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         
-        print(_rigidbody2D.velocity);
+        //print(_rigidbody2D.velocity);
     }
 
     private void FixedUpdate()
@@ -318,7 +318,10 @@ public class PlayerMovement : MonoBehaviour
         AudioManager.instance.PlaySound("Slash");
 
         //Deflect bullet in opposite direction from the player's deflection
-        closestBullet.gameObject.GetComponent<ProjectileBehavior>().DefleftProjectile(-(new Vector2(difference.x, difference.y) * deflectForce));
+        if(closestBullet.gameObject.TryGetComponent(out ProjectileBehavior projectileBehavior))
+        {
+            projectileBehavior.DefleftProjectile(-(new Vector2(difference.x, difference.y) * deflectForce));
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)

@@ -8,11 +8,32 @@ public class ProjectileBehavior : MonoBehaviour
     public float lifeTime = 5f;
 
     private Rigidbody2D rb;
+    private DashRadius _dashRadius;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         Destroy(gameObject, lifeTime);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.TryGetComponent(out DashRadius dashRadius))
+        {
+            _dashRadius = dashRadius;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.TryGetComponent(out DashRadius dashRadius))
+        {
+            _dashRadius = null;
+        }
     }
 
     public void FireProjectile(Vector2 launchDir)
@@ -28,5 +49,13 @@ public class ProjectileBehavior : MonoBehaviour
     {
         rb.velocity = deflectForce * deflectMultiplier;
         Debug.Log("wow");
+    }
+
+    private void OnDestroy()
+    {
+        if (_dashRadius)
+        {
+            _dashRadius.RemoveBullet(transform);
+        }
     }
 }

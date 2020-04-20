@@ -10,7 +10,7 @@ public class DashRadius : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = FindObjectOfType<PlayerMovement>().gameObject;
+        player = FindObjectOfType<PlayerBehaviour>().gameObject;
     }
 
     // Update is called once per frame
@@ -48,15 +48,28 @@ public class DashRadius : MonoBehaviour
         return closestObject;
     }
 
+    public void AddBullet(Transform bulletTransform)
+    {
+        if (!bulletList.Contains(bulletTransform))
+        {
+            bulletList.Add(bulletTransform);
+        }
+    }
+
+    public void RemoveBullet(Transform bulletTransform)
+    {
+        if(bulletList.Contains(bulletTransform))
+        {
+            bulletList.Remove(bulletTransform);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Adds projectiles to list when they enter the designated radius
         if (collision.CompareTag("Projectile"))
         {
-            if (!bulletList.Contains(collision.gameObject.transform))
-            {
-                bulletList.Add(collision.gameObject.transform);
-            }
+            AddBullet(collision.gameObject.transform);
         }
     }
 
@@ -65,10 +78,7 @@ public class DashRadius : MonoBehaviour
         //Removes projectiles from list when they leave the designated radius
         if (collision.CompareTag("Projectile"))
         {
-            if(bulletList.Contains(collision.gameObject.transform))
-            {
-                bulletList.Remove(collision.gameObject.transform);
-            }
+            RemoveBullet(collision.gameObject.transform);
         }
     }
 }

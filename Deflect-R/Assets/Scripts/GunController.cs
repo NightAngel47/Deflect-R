@@ -20,8 +20,8 @@ public class GunController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = FindObjectOfType<PlayerMovement>().transform;
-        print("Found player!");
+        player = FindObjectOfType<PlayerBehaviour>().transform;
+        //print("Found player!");
     }
     
     void Update()
@@ -35,14 +35,14 @@ public class GunController : MonoBehaviour
             
 
             //start firing
-            print("Start Firing!");
+            //print("Start Firing!");
         }
         if(distanceFrom >= aggroRange && firing) //If the player is too far and the enemy is firing
         {
             firing = false;
 
             //stop firing
-            print("Stop Firing!");
+            //print("Stop Firing!");
         }
     }
 
@@ -63,11 +63,10 @@ public class GunController : MonoBehaviour
         var playerPos = player.position;
         
         Vector3 bulletDirection = (gunPos - playerPos).normalized; //Get the Vector2 towards the player
-        
         ProjectileBehavior newBullet = Instantiate(bullet, gunPos - bulletDirection, Quaternion.identity).GetComponent<ProjectileBehavior>();
         newBullet.FireProjectile(-bulletDirection);
         
-        print("Bullet spawned!");
+        //print("Bullet spawned!");
     }
 
     //Every X seconds fire a projectile @ the player
