@@ -59,12 +59,15 @@ public class PlayerBehaviour : MonoBehaviour
     private Transform closestBullet;
     private Camera _camera;
 
+    public PauseManager pauseManager;
+
     void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _collider = GetComponent<Collider2D>();
+        pauseManager = FindObjectOfType<PauseManager>();
 
         dashRadius = detectionZone.GetComponent<DashRadius>();
 
@@ -110,21 +113,24 @@ public class PlayerBehaviour : MonoBehaviour
             Vector2 mouseOnScreen = (Vector2)_camera.ScreenToViewportPoint(Input.mousePosition);
             float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
 
-            // rotate the deflection circle towards the mouse position
-            deflectDirectionCircle.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle + 90));
-
-            if (Input.GetButtonDown("Fire1"))
+            if(!pauseManager.isPaused)
             {
-                if (!freezeTimeCoroutineStopped)
+                // rotate the deflection circle towards the mouse position
+                deflectDirectionCircle.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle + 90));
+
+                if (Input.GetButtonDown("Fire1"))
                 {
-                    freezeTimeCoroutineStopped = true;
-                    StopCoroutine(freezeTimeCoroutine);
-                    UnfreezeTime();
-                    DeflectPlayer();
+                    if (!freezeTimeCoroutineStopped)
+                    {
+                        freezeTimeCoroutineStopped = true;
+                        StopCoroutine(freezeTimeCoroutine);
+                        UnfreezeTime();
+                        DeflectPlayer();
+                    }
                 }
+
+                UsingFocus();
             }
-            
-            UsingFocus();
         }
         else
         {
@@ -162,7 +168,7 @@ public class PlayerBehaviour : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                if (dashRadius.FindClosestObject() != null && _currentFocusAmount > _minUsableFocus)
+                if (dashRadius.FindClosestObject() != null && _currentFocusAmount > _minUsableFocus && !pauseManager.isPaused)
                 {
                     closestBullet = dashRadius.FindClosestObject();
 
@@ -304,12 +310,16 @@ public class PlayerBehaviour : MonoBehaviour
 
     private bool UsingFocus()
     {
-        _currentFocusAmount -= Time.unscaledDeltaTime * focusUsingRate;
-        if (_currentFocusAmount < 0)
+        if (!pauseManager.isPaused)
         {
-            _currentFocusAmount = 0;
+            _currentFocusAmount -= Time.unscaledDeltaTime * focusUsingRate;
+            if (_currentFocusAmount < 0)
+            {
+                _currentFocusAmount = 0;
+            }
+            focusFillImage.fillAmount = _currentFocusAmount / timeFreezeMaxDuration;
         }
-        focusFillImage.fillAmount = _currentFocusAmount / timeFreezeMaxDuration;
+
         return _currentFocusAmount <= 0;
     }
 
