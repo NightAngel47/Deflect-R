@@ -5,8 +5,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+using System.Runtime.InteropServices;
+
 public class PlayerBehaviour : MonoBehaviour
 {
+    
+    
+    [DllImport("user32.dll")]
+    static extern bool SetCursorPos(int X, int Y); 
+    
     // tweakable variables
     [SerializeField, Tooltip("The speed the player moves at"), Range(1, 500)] private float speed = 1;
     [SerializeField, Tooltip("The force that the player jumps with"), Range(1, 500)] private float jumpForce = 1;
@@ -89,6 +96,7 @@ public class PlayerBehaviour : MonoBehaviour
         _currentFocusAmount = timeFreezeMaxDuration;
         focusFillImage.fillAmount = _currentFocusAmount / timeFreezeMaxDuration;
     }
+    
 
     // Update is called once per frame
     void Update()
@@ -190,7 +198,7 @@ public class PlayerBehaviour : MonoBehaviour
             }
         }
 
-        print(_currentFocusAmount);
+        //print(_currentFocusAmount);
         //print(_rigidbody2D.velocity);
     }
 
@@ -225,12 +233,16 @@ public class PlayerBehaviour : MonoBehaviour
     {
         Vector3 direction = transform.position - projectileTransform.position;
         float dashMagnitude = direction.sqrMagnitude;
-
+        
         //Debug.DrawRay(transform.position, -direction, Color.green, dashMagnitude, false);
 
         if (CanDash(direction, dashMagnitude))
         {
             transform.position = projectileTransform.position;
+
+            //Vector2 screenPos =  _camera.WorldToScreenPoint(transform.position);
+            //SetCursorPos((int) screenPos.x, (int) screenPos.y);
+            
             FreezeTime();
         }
     }
@@ -305,6 +317,10 @@ public class PlayerBehaviour : MonoBehaviour
         // waits for focus to run out before continuing
         yield return new WaitUntil(UsingFocus);
         
+        _animator.SetBool(Slashing, false);
+        AudioManager.instance.StopSound("Heartbeat");
+        AudioManager.instance.StopSound("Draw");
+        
         UnfreezeTime();
     }
 
@@ -350,7 +366,7 @@ public class PlayerBehaviour : MonoBehaviour
         AudioManager.instance.StopSound("Draw");
 
         //Deflect player in the direction of the mouse
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
         Vector3 difference = mousePos - gameObject.transform.position;
         difference.z = 0;
         difference.Normalize();
