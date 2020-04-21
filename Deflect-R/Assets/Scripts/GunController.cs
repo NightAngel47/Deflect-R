@@ -64,6 +64,7 @@ public class GunController : MonoBehaviour
         
         Vector3 bulletDirection = (gunPos - playerPos).normalized; //Get the Vector2 towards the player
         ProjectileBehavior newBullet = Instantiate(bullet, gunPos - bulletDirection, Quaternion.identity).GetComponent<ProjectileBehavior>();
+        newBullet.transform.Rotate(Vector3.forward, Vector3.SignedAngle(gunPos, bulletDirection, Vector3.forward) + 180);
         newBullet.FireProjectile(-bulletDirection);
         
         //print("Bullet spawned!");
