@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerBehaviour : MonoBehaviour
 {
@@ -23,6 +24,12 @@ public class PlayerBehaviour : MonoBehaviour
     // deflect variables
     [SerializeField, Tooltip("The force that is applied to the player on deflect")] private Vector2 deflectForce = new Vector2(15f, 30f);
 
+    // focus variables
+    private float _currentFocusAmount;
+    [SerializeField, Tooltip("The rate at which focus is used while time is frozen")] private float focusUsingRate = 1f;
+    [SerializeField, Tooltip("The rate at which focus is recharged while time is normal")] private float focusRechargeRate = 1f;
+    [SerializeField, Tooltip("The UI Image that displays the current focus")] private Image focusFillImage;
+    
     // component references
     private Rigidbody2D _rigidbody2D;
     private Animator _animator;
@@ -39,14 +46,17 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField, Tooltip("The x offset for the collider, used for when the sprite flips")] private float xOffsetForCollider = 0.4f;
     private static readonly int Moving = Animator.StringToHash("Moving");
     private static readonly int InAir = Animator.StringToHash("InAir");
+    private static readonly int Drawing = Animator.StringToHash("Drawing");
+    private static readonly int Slashing = Animator.StringToHash("Slashing");
 
     // time freeze variables
     public GameObject deflectDirectionCircle;
     private bool timeFrozen;
-    private IEnumerator coroutine;
+    private IEnumerator freezeTimeCoroutine;
     private bool freezeTimeCoroutineStopped;
 
     private Transform closestBullet;
+    private Camera _camera;
 
     void Awake()
     {
@@ -60,16 +70,20 @@ public class PlayerBehaviour : MonoBehaviour
         deflectDirectionCircle.SetActive(false);
         SetTimeFrozen(false);
 
-        coroutine = FreezeTimeDuration();
+        freezeTimeCoroutine = FreezeTimeDuration();
         freezeTimeCoroutineStopped = false;
 
         dashCooled = true;
+        
     }
 
     private void Start()
     {
+        _camera = Camera.main;
         _rigidbody2D.gravityScale = normalGravity;
         _rigidbody2D.drag = normalDrag;
+        _currentFocusAmount = timeFreezeMaxDuration;
+        focusFillImage.fillAmount = _currentFocusAmount / timeFreezeMaxDuration;
     }
 
     // Update is called once per frame
@@ -79,11 +93,11 @@ public class PlayerBehaviour : MonoBehaviour
         {
             transform.rotation = Quaternion.identity;
             _spriteRenderer.flipY = false;
-            _animator.SetBool("Slashing", false);
+            _animator.SetBool(Slashing, false);
         }
         else
         {
-            _animator.SetBool("Slashing", true);
+            _animator.SetBool(Slashing, true);
         }
 
         // if time is frozen, rotate the deflect direction circle with mouse movement
@@ -91,8 +105,8 @@ public class PlayerBehaviour : MonoBehaviour
         if (GetTimeFrozen())
         {
             // determines the angle between the center of the screen and the mouse position
-            Vector2 positionOnScreen = Camera.main.WorldToViewportPoint(deflectDirectionCircle.transform.position);
-            Vector2 mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
+            Vector2 positionOnScreen = _camera.WorldToViewportPoint(deflectDirectionCircle.transform.position);
+            Vector2 mouseOnScreen = (Vector2)_camera.ScreenToViewportPoint(Input.mousePosition);
             float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
 
             // rotate the deflection circle towards the mouse position
@@ -103,11 +117,13 @@ public class PlayerBehaviour : MonoBehaviour
                 if (!freezeTimeCoroutineStopped)
                 {
                     freezeTimeCoroutineStopped = true;
-                    StopCoroutine(coroutine);
+                    StopCoroutine(freezeTimeCoroutine);
                     UnfreezeTime();
                     DeflectPlayer();
                 }
             }
+            
+            UsingFocus();
         }
         else
         {
@@ -153,8 +169,21 @@ public class PlayerBehaviour : MonoBehaviour
                     DashToBullet(closestBullet);
                 }
             }
+
+            // adds focus time while not frozen
+            if (_currentFocusAmount < timeFreezeMaxDuration)
+            {
+                _currentFocusAmount += Time.deltaTime * focusRechargeRate;
+                if (_currentFocusAmount > timeFreezeMaxDuration)
+                {
+                    _currentFocusAmount = timeFreezeMaxDuration;
+                }
+                
+                focusFillImage.fillAmount = _currentFocusAmount / timeFreezeMaxDuration;
+            }
         }
-        
+
+        print(_currentFocusAmount);
         //print(_rigidbody2D.velocity);
     }
 
@@ -233,16 +262,16 @@ public class PlayerBehaviour : MonoBehaviour
     private void FreezeTime()
     {
         //animates the player drawing the sword
-        _animator.SetBool("Drawing", true);
+        _animator.SetBool(Drawing, true);
         AudioManager.instance.PlaySound("Draw");
         AudioManager.instance.PlaySound("Heartbeat");
 
         _canJump = false;
         deflectDirectionCircle.SetActive(true);
         SetTimeFrozen(true);
-        coroutine = FreezeTimeDuration();
+        freezeTimeCoroutine = FreezeTimeDuration();
         _rigidbody2D.velocity = new Vector2(0,0);
-        StartCoroutine(coroutine);
+        StartCoroutine(freezeTimeCoroutine);
     }
 
     /// <summary>
@@ -250,7 +279,7 @@ public class PlayerBehaviour : MonoBehaviour
     /// </summary>
     private void UnfreezeTime()
     {
-        _animator.SetBool("Drawing", false);
+        _animator.SetBool(Drawing, false);
 
         Time.timeScale = 1;
         freezeTimeCoroutineStopped = false;
@@ -266,8 +295,22 @@ public class PlayerBehaviour : MonoBehaviour
     private IEnumerator FreezeTimeDuration()
     {
         Time.timeScale = 0;
-        yield return new WaitForSecondsRealtime(timeFreezeMaxDuration);
+        
+        // waits for focus to run out before continuing
+        yield return new WaitUntil(UsingFocus);
+        
         UnfreezeTime();
+    }
+
+    private bool UsingFocus()
+    {
+        _currentFocusAmount -= Time.unscaledDeltaTime * focusUsingRate;
+        if (_currentFocusAmount < 0)
+        {
+            _currentFocusAmount = 0;
+        }
+        focusFillImage.fillAmount = _currentFocusAmount / timeFreezeMaxDuration;
+        return _currentFocusAmount <= 0;
     }
 
     /// <summary>
@@ -339,9 +382,14 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "OutOfBounds")
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if (collision.CompareTag("OutOfBounds"))
+        { 
+            RestartLevel();   
         }
+    }
+
+    private void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
