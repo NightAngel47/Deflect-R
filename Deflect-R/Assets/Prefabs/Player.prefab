@@ -515,6 +515,7 @@ MonoBehaviour:
   airDrag: 0
   xOffsetForCollider: 0.4
   deflectDirectionCircle: {fileID: 1718538437}
+  pauseManager: {fileID: 0}
 --- !u!95 &820933682
 Animator:
   serializedVersion: 3
@@ -547,6 +548,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.4, y: 0}
-  m_Size: {x: 0.8, y: 2}
+  m_Offset: {x: 0.45, y: 0}
+  m_Size: {x: 0.6, y: 1.8}
   m_Direction: 0
