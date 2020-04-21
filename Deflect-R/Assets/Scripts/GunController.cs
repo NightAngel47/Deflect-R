@@ -48,7 +48,7 @@ public class GunController : MonoBehaviour
 
     private IEnumerator FireBullets()
     {
-        yield return new WaitForSeconds(timeBetweenFire);
+        yield return new WaitForSecondsRealtime(timeBetweenFire);
         SpawnBullet();
 
         if (firing)
