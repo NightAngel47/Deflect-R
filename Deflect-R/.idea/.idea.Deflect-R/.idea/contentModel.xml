@@ -11,6 +11,7 @@
         <e p="ProjectileBehavior.cs" t="Include" />
         <e p="Scripts" t="Include">
           <e p="AudioManager.cs" t="Include" />
+          <e p="CameraZoom.cs" t="Include" />
           <e p="GameSoundEffect.cs" t="Include" />
           <e p="GunController.cs" t="Include" />
           <e p="PlayerBehaviour.cs" t="Include" />
