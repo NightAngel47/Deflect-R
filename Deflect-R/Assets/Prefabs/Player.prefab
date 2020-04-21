@@ -501,12 +501,16 @@ MonoBehaviour:
   jumpGravity: 3.5
   normalGravity: 7
   detectionZone: {fileID: 1779782591}
-  timeFreezeMaxDuration: 2
+  timeFreezeMaxDuration: 5
   dashCooldown: 0.3
   undashableLayer:
     serializedVersion: 2
     m_Bits: 256
   deflectForce: {x: 25, y: 25}
+  _minUsableFocus: 1
+  focusUsingRate: 1
+  focusRechargeRate: 0.7
+  focusFillImage: {fileID: 0}
   normalDrag: 3
   airDrag: 0
   xOffsetForCollider: 0.4

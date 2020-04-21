@@ -26,6 +26,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     // focus variables
     private float _currentFocusAmount;
+    public float _minUsableFocus;
     [SerializeField, Tooltip("The rate at which focus is used while time is frozen")] private float focusUsingRate = 1f;
     [SerializeField, Tooltip("The rate at which focus is recharged while time is normal")] private float focusRechargeRate = 1f;
     [SerializeField, Tooltip("The UI Image that displays the current focus")] private Image focusFillImage;
@@ -161,7 +162,7 @@ public class PlayerBehaviour : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                if (dashRadius.FindClosestObject() != null)
+                if (dashRadius.FindClosestObject() != null && _currentFocusAmount > _minUsableFocus)
                 {
                     closestBullet = dashRadius.FindClosestObject();
 
@@ -285,7 +286,6 @@ public class PlayerBehaviour : MonoBehaviour
         freezeTimeCoroutineStopped = false;
         deflectDirectionCircle.SetActive(false);
         SetTimeFrozen(false);
-        DeflectPlayer();
     }
 
     /// <summary>
