@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 8644729539703486618}
   - component: {fileID: 8644729539703486619}
   - component: {fileID: 8644729539703486621}
+  - component: {fileID: 6243624966061974652}
   m_Layer: 0
   m_Name: Player Virtual Cam
   m_TagString: Untagged
@@ -165,3 +166,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a8a05de0ac134f4f9d01bef6b9da077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6243624966061974652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8644729539703486616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 262b5de2c1fe2334bbfa47baf00f628d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sizeRange: {x: 5, y: 10}
+  cam: {fileID: 8644729539703486619}
+  player: {fileID: 0}
+  expandSpeed: 0.025
