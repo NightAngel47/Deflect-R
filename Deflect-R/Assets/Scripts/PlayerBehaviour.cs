@@ -299,7 +299,7 @@ public class PlayerBehaviour : MonoBehaviour
     private void UnfreezeTime()
     {
         _animator.SetBool(Drawing, false);
-        
+
         Time.timeScale = 1;
         freezeTimeCoroutineStopped = false;
         deflectDirectionCircle.SetActive(false);
@@ -316,6 +316,10 @@ public class PlayerBehaviour : MonoBehaviour
         
         // waits for focus to run out before continuing
         yield return new WaitUntil(UsingFocus);
+        
+        _animator.SetBool(Slashing, false);
+        AudioManager.instance.StopSound("Heartbeat");
+        AudioManager.instance.StopSound("Draw");
         
         UnfreezeTime();
     }
@@ -362,7 +366,7 @@ public class PlayerBehaviour : MonoBehaviour
         AudioManager.instance.StopSound("Draw");
 
         //Deflect player in the direction of the mouse
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
         Vector3 difference = mousePos - gameObject.transform.position;
         difference.z = 0;
         difference.Normalize();
