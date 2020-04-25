@@ -503,6 +503,10 @@ MonoBehaviour:
   detectionZone: {fileID: 1779782591}
   timeFreezeMaxDuration: 5
   dashCooldown: 0.3
+  deflectXRange: 0.75
+  deflectYRange: 0.75
+  xForceMultiplier: 1.5
+  yForceMultiplier: 1.5
   undashableLayer:
     serializedVersion: 2
     m_Bits: 256

@@ -40,6 +40,8 @@ public class CameraZoom : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
         if (expanding)
         {
             if (cam.m_Lens.OrthographicSize < sizeRange.y)
@@ -64,6 +66,9 @@ public class CameraZoom : MonoBehaviour
             {
                 expanding = false;
             }
+        } else
+        {
+            expanding = true;
         }
     }
 }

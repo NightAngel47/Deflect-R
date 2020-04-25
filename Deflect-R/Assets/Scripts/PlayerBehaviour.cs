@@ -63,6 +63,7 @@ public class PlayerBehaviour : MonoBehaviour
     private static readonly int Slashing = Animator.StringToHash("Slashing");
 
     // time freeze variables
+    public ParticleSystem afterImage;
     public GameObject deflectDirectionCircle;
     private bool timeFrozen;
     private IEnumerator freezeTimeCoroutine;
@@ -278,6 +279,7 @@ public class PlayerBehaviour : MonoBehaviour
     private void CoolDash()
     {
         dashCooled = true;
+        afterImage.Stop();
     }
 
     /// <summary>
@@ -289,6 +291,9 @@ public class PlayerBehaviour : MonoBehaviour
         _animator.SetBool(Drawing, true);
         AudioManager.instance.PlaySound("Draw");
         AudioManager.instance.PlaySound("Heartbeat");
+
+        //enables afterimage
+        afterImage.Play();
 
         _canJump = false;
         deflectDirectionCircle.SetActive(true);
