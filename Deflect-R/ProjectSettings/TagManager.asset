@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Projectile
   - OutOfBounds
+  - Ground
   layers:
   - Default
   - TransparentFX

@@ -22,7 +22,7 @@ public class ProjectileBehavior : MonoBehaviour
         {
             _dashRadius = dashRadius;
         }
-        else
+        else if(other.CompareTag("Ground"))
         {
             Destroy(gameObject);
         }
@@ -42,13 +42,15 @@ public class ProjectileBehavior : MonoBehaviour
     }
 
     /// <summary>
-    /// Moves the projectile in the opposite direction from which the player teleports
+    /// Rotates the projectile in the opposite direction from which the player deflects,
+    /// and then adds a velocity to the projectile in that direction.
     /// </summary>
     /// <param name="deflectForce"></param>
     public void DefleftProjectile(Vector2 deflectForce)
     {
+        float newAngle = Mathf.Atan2(deflectForce.y, deflectForce.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(newAngle, Vector3.forward);
         rb.velocity = deflectForce * deflectMultiplier;
-        Debug.Log("wow");
     }
 
     private void OnDestroy()
