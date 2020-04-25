@@ -381,7 +381,7 @@ public class PlayerBehaviour : MonoBehaviour
         _spriteRenderer.flipY = _rigidbody2D.velocity.x < 0;
         _spriteRenderer.flipX = false;
         //_spriteRenderer.flipX = _rigidbody2D.velocity.x < 0;
-;
+
         transform.rotation = Quaternion.AngleAxis((Mathf.Atan2(_rigidbody2D.velocity.y, _rigidbody2D.velocity.x) * Mathf.Rad2Deg), Vector3.forward);
 
         AudioManager.instance.PlaySound("Slash");
