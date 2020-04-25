@@ -376,7 +376,7 @@ public class PlayerBehaviour : MonoBehaviour
         _rigidbody2D.drag = airDrag;
 
         //Adds the deflection force to the player
-        _rigidbody2D.AddForce(new Vector2(difference.x, difference.y) * deflectForce, ForceMode2D.Impulse);
+        _rigidbody2D.AddForce(difference * deflectForce, ForceMode2D.Impulse);
 
         _spriteRenderer.flipY = _rigidbody2D.velocity.x < 0;
         _spriteRenderer.flipX = false;
@@ -389,7 +389,7 @@ public class PlayerBehaviour : MonoBehaviour
         //Deflect bullet in opposite direction from the player's deflection
         if(closestBullet.gameObject.TryGetComponent(out ProjectileBehavior projectileBehavior))
         {
-            projectileBehavior.DefleftProjectile(-(new Vector2(difference.x, difference.y) * deflectForce));
+            projectileBehavior.DefleftProjectile(-(difference * deflectForce));
         }
     }
 
