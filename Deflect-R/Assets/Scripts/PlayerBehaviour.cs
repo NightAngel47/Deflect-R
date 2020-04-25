@@ -126,7 +126,7 @@ public class PlayerBehaviour : MonoBehaviour
                 // rotate the deflection circle towards the mouse position
                 deflectDirectionCircle.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle + 90));
 
-                if (Input.GetButtonDown("Fire1"))
+                if (Input.GetButtonUp("Fire1"))
                 {
                     if (!freezeTimeCoroutineStopped)
                     {
@@ -174,7 +174,7 @@ public class PlayerBehaviour : MonoBehaviour
                 _rigidbody2D.drag = normalDrag;
             }
 
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetButtonDown("Fire1"))
             {
                 if (dashRadius.FindClosestObject() != null && _currentFocusAmount > _minUsableFocus && !pauseManager.isPaused)
                 {
