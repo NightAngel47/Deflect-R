@@ -6972,6 +6972,16 @@ PrefabInstance:
       propertyPath: focusFillImage
       value: 
       objectReference: {fileID: 323698341}
+    - target: {fileID: 5080836215505147859, guid: 99d88c1a48759744ea3eb8a790943ccc,
+        type: 3}
+      propertyPath: deflectYRange
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 5080836215505147859, guid: 99d88c1a48759744ea3eb8a790943ccc,
+        type: 3}
+      propertyPath: xForceMultiplier
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99d88c1a48759744ea3eb8a790943ccc, type: 3}
 --- !u!1001 &4161108299455322872

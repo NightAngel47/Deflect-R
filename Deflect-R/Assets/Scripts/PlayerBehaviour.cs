@@ -22,6 +22,11 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField, Tooltip("The radius that the player may dash to objects in")] public GameObject detectionZone;
     [SerializeField, Tooltip("The max time the player may be frozen in time for before time unfreezes")] public float timeFreezeMaxDuration = 2f;
     [SerializeField, Tooltip("The time that a player must wait after dashing before dashing again.")] public float dashCooldown;
+    [SerializeField, Tooltip("Range at which deflect X needs force added to it. ")] public float deflectXRange = 0.75f;
+    [SerializeField, Tooltip("Range at which deflect y needs force added to it. ")] public float deflectYRange = 0.75f;
+    [SerializeField, Tooltip("Force to add to X vector when moving in greater X direction. ")] public float xForceMultiplier = 1.5f;
+    [SerializeField, Tooltip("Force to add to Y vector when moving in greater X direction. ")] public float yForceMultiplier = 1.5f;
+
 
     // dash variables
     private DashRadius dashRadius;
@@ -375,8 +380,21 @@ public class PlayerBehaviour : MonoBehaviour
         _rigidbody2D.gravityScale = jumpGravity;
         _rigidbody2D.drag = airDrag;
 
-        //Adds the deflection force to the player
-        _rigidbody2D.AddForce(difference * deflectForce, ForceMode2D.Impulse);
+        if (Mathf.Abs(difference.x) > deflectXRange)
+        {
+            //Adds the deflection force to the player
+            _rigidbody2D.AddForce(difference * new Vector2(deflectForce.x * xForceMultiplier, deflectForce.y), ForceMode2D.Impulse);
+        }
+        else if (Mathf.Abs(difference.y) < deflectYRange)
+        {
+            //Adds the deflection force to the player
+            _rigidbody2D.AddForce(difference * new Vector2(deflectForce.x, deflectForce.y * yForceMultiplier), ForceMode2D.Impulse);
+        }
+        else
+        {
+            //Adds the deflection force to the player
+            _rigidbody2D.AddForce(difference * deflectForce, ForceMode2D.Impulse);
+        }
 
         _spriteRenderer.flipY = _rigidbody2D.velocity.x < 0;
         _spriteRenderer.flipX = false;
