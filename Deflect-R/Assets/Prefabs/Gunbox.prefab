@@ -98,6 +98,7 @@ MonoBehaviour:
   bullet: {fileID: 7592741777047333828, guid: 8d013b0942e901946855c0ad62c1aff1, type: 3}
   aggroRange: 10
   timeBetweenFire: 1.5
+  timeBeforeFire: 0
 --- !u!58 &5675201651149984100
 CircleCollider2D:
   m_ObjectHideFlags: 0

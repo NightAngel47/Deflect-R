@@ -488,6 +488,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gunbox (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806058, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: timeBeforeFire
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806059, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
       propertyPath: m_LocalPosition.x

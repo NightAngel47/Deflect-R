@@ -9,7 +9,8 @@ public class GunController : MonoBehaviour
 
     public float aggroRange; //How close the player has to be before the enemy starts attacking
     //public float timeUntilFire; //Time it takes for the enemy to fire once the player enters their range
-    public float timeBetweenFire; //Time between successive attacks if the player remains in the enemy's range
+    public float timeBetweenFire = 1f; //Time between successive attacks if the player remains in the enemy's range
+    public float timeBeforeFire = 1f;
     //public float bulletSpeed; //How fast the bullets move
     //public float bulletDestroyTimer; //After how many seconds should the bullet destroy itself
 
@@ -48,8 +49,9 @@ public class GunController : MonoBehaviour
 
     private IEnumerator FireBullets()
     {
-        yield return new WaitForSecondsRealtime(timeBetweenFire);
+        yield return new WaitForSecondsRealtime(timeBeforeFire);
         SpawnBullet();
+        yield return new WaitForSecondsRealtime(timeBetweenFire);
 
         if (firing)
         {
