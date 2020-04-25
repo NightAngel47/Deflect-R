@@ -38,16 +38,30 @@ public class DashRadius : MonoBehaviour
             float targetMagnitude = targetDist.sqrMagnitude;
 
             //If the vector's magnitude is less than the current shortest vector magnitude, update closestDistance and closestObject
-            if(targetMagnitude < closestDistance)
+            if (targetMagnitude < closestDistance)
             {
+                //Disables all closest marker objects in list
+                for(int i = 0; i < bulletList.Count; i++)
+                {
+                    bulletList[i].Find("ClosestMarker").gameObject.SetActive(false);
+                }
+
+                //Set new closest distance to compare projectiles to and new closest object
                 closestDistance = targetMagnitude;
                 closestObject = bulletTransform;
+
+                //Activate the closest marker on the closest object
+                closestObject.Find("ClosestMarker").gameObject.SetActive(true);
             }
         }
 
         return closestObject;
     }
 
+    /// <summary>
+    /// Adds a projectile to the bullet list if it has not yet been added
+    /// </summary>
+    /// <param name="bulletTransform"></param>
     public void AddBullet(Transform bulletTransform)
     {
         if (!bulletList.Contains(bulletTransform))
@@ -56,10 +70,15 @@ public class DashRadius : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Removes a projectile from the bullet list if the projectile is in the bullet list
+    /// </summary>
+    /// <param name="bulletTransform"></param>
     public void RemoveBullet(Transform bulletTransform)
     {
         if(bulletList.Contains(bulletTransform))
         {
+            bulletTransform.Find("ClosestMarker").gameObject.SetActive(false);
             bulletList.Remove(bulletTransform);
         }
     }
