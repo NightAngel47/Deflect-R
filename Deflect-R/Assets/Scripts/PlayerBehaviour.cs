@@ -192,18 +192,7 @@ public class PlayerBehaviour : MonoBehaviour
                 }
             }
 
-            // adds focus time while not frozen
-            //if (_currentFocusAmount < timeFreezeMaxDuration)
-            //{
-            //    _currentFocusAmount += Time.deltaTime * focusRechargeRate;
-            //    if (_currentFocusAmount > timeFreezeMaxDuration)
-            //    {
-            //        _currentFocusAmount = timeFreezeMaxDuration;
-            //    }
-
-            //    focusFillImage.fillAmount = _currentFocusAmount / timeFreezeMaxDuration;
-            //}
-
+            // if on ground and time isn't frozen, focus recharges quickly
             if ((_currentFocusAmount < timeFreezeMaxDuration) && _canJump)
             {
                 _currentFocusAmount += Time.deltaTime * focusRechargeRate;
@@ -214,6 +203,7 @@ public class PlayerBehaviour : MonoBehaviour
 
                 focusFillImage.fillAmount = _currentFocusAmount / timeFreezeMaxDuration;
             }
+            // otherwise, if in air and time isn't frozen, focus recharges slowly
             else if ((_currentFocusAmount < timeFreezeMaxDuration) && !_canJump)
             {
                 _currentFocusAmount += Time.deltaTime * focusRechargeRateInAir;
@@ -225,9 +215,6 @@ public class PlayerBehaviour : MonoBehaviour
                 focusFillImage.fillAmount = _currentFocusAmount / timeFreezeMaxDuration;
             }
         }
-
-        //print(_currentFocusAmount);
-        //print(_rigidbody2D.velocity);
     }
 
     private void FixedUpdate()
