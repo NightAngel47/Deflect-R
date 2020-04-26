@@ -6,6 +6,7 @@ public class GunController : MonoBehaviour
 {
     Transform player;
     public GameObject bullet;
+    private Animator anim;
 
     public float aggroRange; //How close the player has to be before the enemy starts attacking
     //public float timeUntilFire; //Time it takes for the enemy to fire once the player enters their range
@@ -21,12 +22,23 @@ public class GunController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponentInChildren<Animator>();
         player = FindObjectOfType<PlayerBehaviour>().transform;
         //print("Found player!");
     }
     
     void Update()
     {
+        Vector3 targ = player.transform.position;
+        targ.z = 0f;
+
+        Vector3 objectPos = transform.position;
+        targ.x = targ.x - objectPos.x;
+        targ.y = targ.y - objectPos.y;
+
+        float angle = Mathf.Atan2(targ.y, targ.x) * Mathf.Rad2Deg;
+        anim.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle-90));
+
         float distanceFrom = Vector2.Distance(transform.position, player.transform.position);
         if(distanceFrom < aggroRange && !firing) //If the player is close enough and the enemy isn't yet firing
         {
@@ -49,8 +61,10 @@ public class GunController : MonoBehaviour
 
     private IEnumerator FireBullets()
     {
+        anim.SetBool("Drawing", true);
         yield return new WaitForSeconds(timeBeforeFire);
         SpawnBullet();
+        anim.SetBool("Drawing", false);
         yield return new WaitForSeconds(timeBetweenFire);
 
         if (firing)
