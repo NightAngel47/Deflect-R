@@ -40,7 +40,8 @@ public class PlayerBehaviour : MonoBehaviour
     private float _currentFocusAmount;
     public float _minUsableFocus;
     [SerializeField, Tooltip("The rate at which focus is used while time is frozen")] private float focusUsingRate = 1f;
-    [SerializeField, Tooltip("The rate at which focus is recharged while time is normal")] private float focusRechargeRate = 1f;
+    [SerializeField, Tooltip("The rate at which focus is recharged while time is normal and the player is on the ground")] private float focusRechargeRate = 1f;
+    [SerializeField, Tooltip("The rate at which focus is recharged while time is normal and the player is in the air")] private float focusRechargeRateInAir = 0.25f;
     [SerializeField, Tooltip("The UI Image that displays the current focus")] private Image focusFillImage;
     
     // component references
@@ -192,14 +193,35 @@ public class PlayerBehaviour : MonoBehaviour
             }
 
             // adds focus time while not frozen
-            if (_currentFocusAmount < timeFreezeMaxDuration)
+            //if (_currentFocusAmount < timeFreezeMaxDuration)
+            //{
+            //    _currentFocusAmount += Time.deltaTime * focusRechargeRate;
+            //    if (_currentFocusAmount > timeFreezeMaxDuration)
+            //    {
+            //        _currentFocusAmount = timeFreezeMaxDuration;
+            //    }
+
+            //    focusFillImage.fillAmount = _currentFocusAmount / timeFreezeMaxDuration;
+            //}
+
+            if ((_currentFocusAmount < timeFreezeMaxDuration) && _canJump)
             {
                 _currentFocusAmount += Time.deltaTime * focusRechargeRate;
                 if (_currentFocusAmount > timeFreezeMaxDuration)
                 {
                     _currentFocusAmount = timeFreezeMaxDuration;
                 }
-                
+
+                focusFillImage.fillAmount = _currentFocusAmount / timeFreezeMaxDuration;
+            }
+            else if ((_currentFocusAmount < timeFreezeMaxDuration) && !_canJump)
+            {
+                _currentFocusAmount += Time.deltaTime * focusRechargeRateInAir;
+                if (_currentFocusAmount > timeFreezeMaxDuration)
+                {
+                    _currentFocusAmount = timeFreezeMaxDuration;
+                }
+
                 focusFillImage.fillAmount = _currentFocusAmount / timeFreezeMaxDuration;
             }
         }
