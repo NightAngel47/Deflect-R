@@ -41,7 +41,23 @@ public class GunController : MonoBehaviour
             float angle = Mathf.Atan2(targ.y, targ.x) * Mathf.Rad2Deg;
             anim.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
         }
-        
+        else if (gameObject.tag == "Forward")
+        {
+            anim.transform.rotation = Quaternion.Euler(new Vector3(0, 0, + 90));
+        }
+        else if (gameObject.tag == "Backward")
+        {
+            anim.transform.rotation = Quaternion.Euler(new Vector3(0, 0, - 90));
+        }
+        else if (gameObject.tag == "Down Below")
+        {
+            anim.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        }
+        else if (gameObject.tag == "From Above")
+        {
+            anim.transform.rotation = Quaternion.Euler(new Vector3(0, 0, - 180));
+        }
+
 
         float distanceFrom = Vector2.Distance(transform.position, player.transform.position);
         if(distanceFrom < aggroRange && !firing) //If the player is close enough and the enemy isn't yet firing
