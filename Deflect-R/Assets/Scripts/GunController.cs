@@ -26,18 +26,22 @@ public class GunController : MonoBehaviour
         player = FindObjectOfType<PlayerBehaviour>().transform;
         //print("Found player!");
     }
-    
+
     void Update()
     {
-        Vector3 targ = player.transform.position;
-        targ.z = 0f;
+        if (gameObject.tag == "Tracker")
+        {
+            Vector3 targ = player.transform.position;
+            targ.z = 0f;
 
-        Vector3 objectPos = transform.position;
-        targ.x = targ.x - objectPos.x;
-        targ.y = targ.y - objectPos.y;
+            Vector3 objectPos = transform.position;
+            targ.x = targ.x - objectPos.x;
+            targ.y = targ.y - objectPos.y;
 
-        float angle = Mathf.Atan2(targ.y, targ.x) * Mathf.Rad2Deg;
-        anim.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle-90));
+            float angle = Mathf.Atan2(targ.y, targ.x) * Mathf.Rad2Deg;
+            anim.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+        }
+        
 
         float distanceFrom = Vector2.Distance(transform.position, player.transform.position);
         if(distanceFrom < aggroRange && !firing) //If the player is close enough and the enemy isn't yet firing
@@ -75,13 +79,46 @@ public class GunController : MonoBehaviour
 
     private void SpawnBullet()
     {
+        Vector3 bulletDirection;
         var gunPos = transform.position;
         var playerPos = player.position;
         
-        Vector3 bulletDirection = (gunPos - playerPos).normalized; //Get the Vector2 towards the player
-        ProjectileBehavior newBullet = Instantiate(bullet, gunPos - bulletDirection, Quaternion.identity).GetComponent<ProjectileBehavior>();
-        newBullet.transform.Rotate(Vector3.forward, Vector3.SignedAngle(gunPos, bulletDirection, Vector3.forward) + 180);
-        newBullet.FireProjectile(-bulletDirection);
+        if (gameObject.tag == "Tracker")
+        {
+            bulletDirection = (gunPos - playerPos).normalized; //Get the Vector2 towards the player
+            ProjectileBehavior newBullet = Instantiate(bullet, gunPos - bulletDirection, Quaternion.identity).GetComponent<ProjectileBehavior>();
+            newBullet.transform.Rotate(Vector3.forward, Vector3.SignedAngle(gunPos, bulletDirection, Vector3.forward) + 180);
+            newBullet.FireProjectile(-bulletDirection);
+        }
+        else if (gameObject.tag == "Forward")
+        {
+            bulletDirection = (gunPos - Vector3.back).normalized;
+            ProjectileBehavior newBullet = Instantiate(bullet, gunPos - bulletDirection, Quaternion.identity).GetComponent<ProjectileBehavior>();
+            newBullet.transform.Rotate(Vector3.forward, Vector3.SignedAngle(gunPos, bulletDirection, Vector3.forward) + 180);
+            newBullet.FireProjectile(-bulletDirection);
+        }
+        else if (gameObject.tag == "Backward")
+        {
+            bulletDirection = (gunPos - Vector3.forward).normalized;
+            ProjectileBehavior newBullet = Instantiate(bullet, gunPos - bulletDirection, Quaternion.identity).GetComponent<ProjectileBehavior>();
+            newBullet.transform.Rotate(Vector3.forward, Vector3.SignedAngle(gunPos, bulletDirection, Vector3.forward));
+            newBullet.FireProjectile(bulletDirection);
+        }
+        else if (gameObject.tag == "From Above")
+        {
+            bulletDirection = (gunPos - Vector3.down).normalized;
+            ProjectileBehavior newBullet = Instantiate(bullet, gunPos - bulletDirection, Quaternion.identity).GetComponent<ProjectileBehavior>();
+            newBullet.transform.Rotate(Vector3.forward, Vector3.SignedAngle(gunPos, bulletDirection, Vector3.forward) - 90);
+            newBullet.FireProjectile(Vector2.down);
+        }
+        else if (gameObject.tag == "Down Below")
+        {
+            bulletDirection = (gunPos - Vector3.up).normalized;
+            ProjectileBehavior newBullet = Instantiate(bullet, gunPos - bulletDirection, Quaternion.identity).GetComponent<ProjectileBehavior>();
+            newBullet.transform.Rotate(Vector3.forward, Vector3.SignedAngle(gunPos, bulletDirection, Vector3.forward) + 90);
+            newBullet.FireProjectile(Vector2.up);
+        }
+        
         
         //print("Bullet spawned!");
     }

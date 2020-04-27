@@ -148,6 +148,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gunbox (24)
       objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806054, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tracker
+      objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806059, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -226,6 +231,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gunbox (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806054, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tracker
       objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806059, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
@@ -310,6 +320,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gunbox (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806054, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tracker
       objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806059, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
@@ -474,6 +489,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gunbox (25)
       objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806054, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tracker
+      objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806059, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -557,6 +577,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gunbox (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806054, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Down Below
       objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806058, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
@@ -825,6 +850,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gunbox (27)
       objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806054, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tracker
+      objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806059, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1035,6 +1065,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gunbox (26)
       objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806054, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tracker
+      objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806059, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1191,6 +1226,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gunbox (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806054, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tracker
       objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806059, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
@@ -1349,6 +1389,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gunbox (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806054, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tracker
+      objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806059, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1427,6 +1472,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gunbox (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806054, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tracker
       objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806059, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
@@ -1576,6 +1626,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gunbox (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806054, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Down Below
+      objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806059, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1654,6 +1709,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gunbox (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806054, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: m_TagString
+      value: From Above
       objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806059, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
@@ -2072,6 +2132,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gunbox (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806054, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tracker
       objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806059, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
@@ -3078,6 +3143,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gunbox (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806054, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tracker
+      objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806059, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3755,6 +3825,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gunbox (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806054, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tracker
       objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806059, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
@@ -4511,6 +4586,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gunbox (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806054, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tracker
+      objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806059, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4594,6 +4674,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gunbox (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806054, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tracker
       objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806059, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
@@ -4690,6 +4775,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gunbox (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806054, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tracker
       objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806059, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
@@ -4932,6 +5022,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gunbox (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806054, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tracker
       objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806059, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
@@ -5178,6 +5273,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gunbox (28)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806054, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tracker
       objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806059, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
@@ -5782,6 +5882,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gunbox (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806054, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tracker
       objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806059, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
@@ -10635,6 +10740,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gunbox (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806054, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tracker
+      objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806059, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10864,6 +10974,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gunbox (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806054, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tracker
+      objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806059, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10947,6 +11062,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gunbox (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806054, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tracker
       objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806059, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
@@ -11433,6 +11553,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gunbox (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806054, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tracker
+      objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806059, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11516,6 +11641,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gunbox
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806054, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Forward
       objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806059, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
@@ -11734,6 +11864,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gunbox (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806054, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Down Below
+      objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806059, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11824,6 +11959,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gunbox (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806054, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Down Below
+      objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806059, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11913,6 +12053,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gunbox (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635452776123806054, guid: 3cc2d1998642c0447b38854e542ee72b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tracker
       objectReference: {fileID: 0}
     - target: {fileID: 8635452776123806059, guid: 3cc2d1998642c0447b38854e542ee72b,
         type: 3}
