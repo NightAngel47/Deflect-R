@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -12226,44 +12226,9 @@ PrefabInstance:
       objectReference: {fileID: 323698341}
     - target: {fileID: 5080836215505147859, guid: 99d88c1a48759744ea3eb8a790943ccc,
         type: 3}
-      propertyPath: deflectYRange
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 5080836215505147859, guid: 99d88c1a48759744ea3eb8a790943ccc,
-        type: 3}
-      propertyPath: xForceMultiplier
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5080836215505147859, guid: 99d88c1a48759744ea3eb8a790943ccc,
-        type: 3}
       propertyPath: afterImage
       value: 
       objectReference: {fileID: 1629121424}
-    - target: {fileID: 5080836215505147859, guid: 99d88c1a48759744ea3eb8a790943ccc,
-        type: 3}
-      propertyPath: focusRechargeRate
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5080836215505147859, guid: 99d88c1a48759744ea3eb8a790943ccc,
-        type: 3}
-      propertyPath: focusRechargeRateInAir
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5080836215505147859, guid: 99d88c1a48759744ea3eb8a790943ccc,
-        type: 3}
-      propertyPath: _graceWindowTime
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5080836215505147859, guid: 99d88c1a48759744ea3eb8a790943ccc,
-        type: 3}
-      propertyPath: _focusBaseCost
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5080836215505147859, guid: 99d88c1a48759744ea3eb8a790943ccc,
-        type: 3}
-      propertyPath: _minUsableFocus
-      value: 0.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99d88c1a48759744ea3eb8a790943ccc, type: 3}
 --- !u!1001 &4161108299455322872

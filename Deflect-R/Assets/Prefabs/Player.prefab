@@ -502,7 +502,7 @@ MonoBehaviour:
   jumpGravity: 3.5
   normalGravity: 7
   detectionZone: {fileID: 1779782591}
-  timeFreezeMaxDuration: 5
+  timeFreezeMaxDuration: 3
   dashCooldown: 0.3
   deflectXRange: 0.75
   deflectYRange: 0.75
@@ -512,9 +512,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   deflectForce: {x: 25, y: 25}
-  _minUsableFocus: 1
+  _minUsableFocus: 0.5
+  _focusBaseCost: 1
+  _graceWindowTime: 0.5
   focusUsingRate: 1
-  focusRechargeRate: 2
+  focusRechargeRate: 5
   focusRechargeRateInAir: 0.5
   focusFillImage: {fileID: 0}
   normalDrag: 3
