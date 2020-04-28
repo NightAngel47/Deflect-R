@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -955,7 +955,7 @@ MonoBehaviour:
   musicSource: {fileID: 2056035404}
   musicClip: {fileID: 0}
   soundEffectSource: {fileID: 840595294}
-  soundEffectClip: {fileID: 0}
+  soundEffectClip: {fileID: 8300000, guid: 4a3de2e9256215044af26aa82d5d2bad, type: 3}
 --- !u!1 &840595292
 GameObject:
   m_ObjectHideFlags: 0
