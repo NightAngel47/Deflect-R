@@ -12247,7 +12247,7 @@ PrefabInstance:
     - target: {fileID: 5080836215505147859, guid: 99d88c1a48759744ea3eb8a790943ccc,
         type: 3}
       propertyPath: focusRechargeRateInAir
-      value: 0.15
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99d88c1a48759744ea3eb8a790943ccc, type: 3}
