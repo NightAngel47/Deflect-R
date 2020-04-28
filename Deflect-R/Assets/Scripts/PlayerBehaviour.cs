@@ -39,6 +39,9 @@ public class PlayerBehaviour : MonoBehaviour
     // focus variables
     private float _currentFocusAmount;
     public float _minUsableFocus;
+    public float _focusBaseCost;
+    public float _graceWindowTime;
+    private bool _graceWindow;
     [SerializeField, Tooltip("The rate at which focus is used while time is frozen")] private float focusUsingRate = 1f;
     [SerializeField, Tooltip("The rate at which focus is recharged while time is normal and the player is on the ground")] private float focusRechargeRate = 1f;
     [SerializeField, Tooltip("The rate at which focus is recharged while time is normal and the player is in the air")] private float focusRechargeRateInAir = 0.25f;
@@ -301,6 +304,10 @@ public class PlayerBehaviour : MonoBehaviour
         AudioManager.instance.PlaySound("Draw");
         AudioManager.instance.PlaySound("Heartbeat");
 
+        //begin the grace window and reduce focus by base cost
+        _currentFocusAmount -= _focusBaseCost;
+        _graceWindow = true;
+
         //enables afterimage
         afterImage.Play();
 
@@ -332,7 +339,11 @@ public class PlayerBehaviour : MonoBehaviour
     private IEnumerator FreezeTimeDuration()
     {
         Time.timeScale = 0;
-        
+
+        //waits for the grace window to end
+        yield return new WaitForSecondsRealtime(_graceWindowTime);
+        _graceWindow = false;
+
         // waits for focus to run out before continuing
         yield return new WaitUntil(UsingFocus);
         
@@ -345,7 +356,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private bool UsingFocus()
     {
-        if (!pauseManager.isPaused)
+        if (!pauseManager.isPaused && !_graceWindow)
         {
             _currentFocusAmount -= Time.unscaledDeltaTime * focusUsingRate;
             if (_currentFocusAmount < 0)
