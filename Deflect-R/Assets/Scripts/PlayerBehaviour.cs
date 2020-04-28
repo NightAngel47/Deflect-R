@@ -39,6 +39,9 @@ public class PlayerBehaviour : MonoBehaviour
     // focus variables
     private float _currentFocusAmount;
     public float _minUsableFocus;
+    public float _focusBaseCost;
+    public float _graceWindowTime;
+    private bool _graceWindow;
     [SerializeField, Tooltip("The rate at which focus is used while time is frozen")] private float focusUsingRate = 1f;
     [SerializeField, Tooltip("The rate at which focus is recharged while time is normal and the player is on the ground")] private float focusRechargeRate = 1f;
     [SerializeField, Tooltip("The rate at which focus is recharged while time is normal and the player is in the air")] private float focusRechargeRateInAir = 0.25f;
@@ -188,7 +191,8 @@ public class PlayerBehaviour : MonoBehaviour
                     closestBullet = dashRadius.FindClosestObject();
 
                     // dashes player to the closest projectile
-                    DashToBullet(closestBullet);
+                    //DashToBullet(closestBullet);
+                    StartCoroutine("DashToBullet", closestBullet);
                 }
             }
 
@@ -244,7 +248,7 @@ public class PlayerBehaviour : MonoBehaviour
     /// If the player can dash to a projectile, moves the player to that projectile
     /// </summary>
     /// <param name="projectileTransform"></param>
-    private void DashToBullet(Transform projectileTransform)
+    private IEnumerator DashToBullet(Transform projectileTransform)
     {
         Vector3 direction = transform.position - projectileTransform.position;
         float dashMagnitude = direction.sqrMagnitude;
@@ -253,7 +257,11 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (CanDash(direction, dashMagnitude))
         {
-            transform.position = projectileTransform.position;
+            for(float i = 0; i < 5; i++)
+            {
+                yield return new WaitForSeconds(.01f);
+                transform.position = Vector2.Lerp(transform.position, projectileTransform.position, i/5);
+            }
 
             //Vector2 screenPos =  _camera.WorldToScreenPoint(transform.position);
             //SetCursorPos((int) screenPos.x, (int) screenPos.y);
@@ -304,6 +312,9 @@ public class PlayerBehaviour : MonoBehaviour
         //enables afterimage
         afterImage.Play();
 
+        _graceWindow = true;
+        _currentFocusAmount -= _focusBaseCost;
+
         _canJump = false;
         deflectDirectionCircle.SetActive(true);
         SetTimeFrozen(true);
@@ -332,7 +343,11 @@ public class PlayerBehaviour : MonoBehaviour
     private IEnumerator FreezeTimeDuration()
     {
         Time.timeScale = 0;
-        
+
+        yield return new WaitForSecondsRealtime(_graceWindowTime);
+        print("Grace Period Ended!");
+        _graceWindow = false;
+
         // waits for focus to run out before continuing
         yield return new WaitUntil(UsingFocus);
         
@@ -345,7 +360,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private bool UsingFocus()
     {
-        if (!pauseManager.isPaused)
+        if (!pauseManager.isPaused && !_graceWindow)
         {
             _currentFocusAmount -= Time.unscaledDeltaTime * focusUsingRate;
             if (_currentFocusAmount < 0)
