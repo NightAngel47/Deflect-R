@@ -439,7 +439,7 @@ public class PlayerBehaviour : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         // resets jump and animation
-        if (!_canJump)
+        if (other.collider.CompareTag("Ground") && !_canJump)
         {
             AudioManager.instance.PlaySound("Land");
             _canJump = true;
