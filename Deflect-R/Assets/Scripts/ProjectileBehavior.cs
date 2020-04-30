@@ -8,11 +8,14 @@ public class ProjectileBehavior : MonoBehaviour
     public float lifeTime = 5f;
 
     private Rigidbody2D rb;
+    private TrailRenderer _trailRenderer;
     private DashRadius _dashRadius;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        _trailRenderer = GetComponent<TrailRenderer>();
+        _trailRenderer.enabled = false;
         Destroy(gameObject, lifeTime);
     }
 
@@ -51,6 +54,7 @@ public class ProjectileBehavior : MonoBehaviour
         float newAngle = Mathf.Atan2(deflectForce.y, deflectForce.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(newAngle, Vector3.forward);
         rb.velocity = deflectForce * deflectMultiplier;
+        _trailRenderer.enabled = true;
     }
 
     private void OnDestroy()

@@ -76,6 +76,8 @@ public class PlayerBehaviour : MonoBehaviour
     private Transform closestBullet;
     private Camera _camera;
 
+    private LineRenderer _lineRenderer;
+
     public PauseManager pauseManager;
 
     void Awake()
@@ -85,7 +87,7 @@ public class PlayerBehaviour : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _collider = GetComponent<Collider2D>();
         pauseManager = FindObjectOfType<PauseManager>();
-
+        _lineRenderer = GetComponent<LineRenderer>();
         dashRadius = detectionZone.GetComponent<DashRadius>();
 
         deflectDirectionCircle.SetActive(false);
@@ -101,6 +103,7 @@ public class PlayerBehaviour : MonoBehaviour
     private void Start()
     {
         _camera = Camera.main;
+        _lineRenderer.enabled = true;
         _rigidbody2D.gravityScale = normalGravity;
         _rigidbody2D.drag = normalDrag;
         _currentFocusAmount = timeFreezeMaxDuration;
@@ -256,6 +259,9 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (CanDash(direction, dashMagnitude))
         {
+            _lineRenderer.SetPosition(0, projectileTransform.position);
+            _lineRenderer.SetPosition(1, transform.position);
+            _lineRenderer.enabled = true;
             transform.position = projectileTransform.position;
 
             //Vector2 screenPos =  _camera.WorldToScreenPoint(transform.position);
@@ -326,6 +332,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         _animator.SetBool(Drawing, false);
 
+        _lineRenderer.enabled = false;
         Time.timeScale = 1;
         freezeTimeCoroutineStopped = false;
         deflectDirectionCircle.SetActive(false);
