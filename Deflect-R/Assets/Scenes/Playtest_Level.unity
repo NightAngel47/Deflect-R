@@ -12187,6 +12187,10 @@ PrefabInstance:
       propertyPath: m_Parameters.colorGradient.m_NumColorKeys
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 162847945, guid: 99d88c1a48759744ea3eb8a790943ccc, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.a
+      value: 0.5411765
+      objectReference: {fileID: 0}
     - target: {fileID: 883306742158301516, guid: 99d88c1a48759744ea3eb8a790943ccc,
         type: 3}
       propertyPath: m_Name
