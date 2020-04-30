@@ -454,6 +454,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (other.collider.CompareTag("Ground"))
         {
             _canJump = false;
+            _animator.SetBool(InAir, true);
         }
     }
 
