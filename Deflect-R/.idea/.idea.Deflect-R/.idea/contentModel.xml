@@ -11,6 +11,7 @@
           <e p="AudioManager.cs" t="Include" />
           <e p="CameraZoom.cs" t="Include" />
           <e p="DashRadius.cs" t="Include" />
+          <e p="DirectionArrow.cs" t="Include" />
           <e p="GameSoundEffect.cs" t="Include" />
           <e p="GunController.cs" t="Include" />
           <e p="ImageHandler.cs" t="Include" />
