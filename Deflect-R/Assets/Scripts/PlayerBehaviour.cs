@@ -108,6 +108,7 @@ public class PlayerBehaviour : MonoBehaviour
         _rigidbody2D.drag = normalDrag;
         _currentFocusAmount = timeFreezeMaxDuration;
         focusFillImage.fillAmount = _currentFocusAmount / timeFreezeMaxDuration;
+        focusFillImage.transform.parent.transform.parent.gameObject.SetActive(false);
     }
     
 
@@ -192,6 +193,7 @@ public class PlayerBehaviour : MonoBehaviour
                 if (dashRadius.FindClosestObject() != null && _currentFocusAmount > _minUsableFocus && !pauseManager.isPaused)
                 {
                     closestBullet = dashRadius.FindClosestObject();
+                    focusFillImage.transform.parent.transform.parent.gameObject.SetActive(true);
 
                     // dashes player to the closest projectile
                     DashToBullet(closestBullet);
@@ -205,6 +207,7 @@ public class PlayerBehaviour : MonoBehaviour
                 if (_currentFocusAmount > timeFreezeMaxDuration)
                 {
                     _currentFocusAmount = timeFreezeMaxDuration;
+                    focusFillImage.transform.parent.transform.parent.gameObject.SetActive(false);
                 }
 
                 focusFillImage.fillAmount = _currentFocusAmount / timeFreezeMaxDuration;
@@ -216,6 +219,7 @@ public class PlayerBehaviour : MonoBehaviour
                 if (_currentFocusAmount > timeFreezeMaxDuration)
                 {
                     _currentFocusAmount = timeFreezeMaxDuration;
+                    focusFillImage.transform.parent.transform.parent.gameObject.SetActive(false);
                 }
 
                 focusFillImage.fillAmount = _currentFocusAmount / timeFreezeMaxDuration;
