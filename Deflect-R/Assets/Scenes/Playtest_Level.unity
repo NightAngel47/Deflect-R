@@ -12159,50 +12159,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 162847945, guid: 99d88c1a48759744ea3eb8a790943ccc, type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 162847945, guid: 99d88c1a48759744ea3eb8a790943ccc, type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 162847945, guid: 99d88c1a48759744ea3eb8a790943ccc, type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 162847945, guid: 99d88c1a48759744ea3eb8a790943ccc, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 162847945, guid: 99d88c1a48759744ea3eb8a790943ccc, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.g
-      value: 0.7815788
-      objectReference: {fileID: 0}
-    - target: {fileID: 162847945, guid: 99d88c1a48759744ea3eb8a790943ccc, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 162847945, guid: 99d88c1a48759744ea3eb8a790943ccc, type: 3}
-      propertyPath: m_Parameters.colorGradient.m_NumColorKeys
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 162847945, guid: 99d88c1a48759744ea3eb8a790943ccc, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.a
-      value: 0.5411765
-      objectReference: {fileID: 0}
-    - target: {fileID: 1718538438, guid: 99d88c1a48759744ea3eb8a790943ccc, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1718538438, guid: 99d88c1a48759744ea3eb8a790943ccc, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1779782592, guid: 99d88c1a48759744ea3eb8a790943ccc, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 883306742158301516, guid: 99d88c1a48759744ea3eb8a790943ccc,
         type: 3}
       propertyPath: m_Name
@@ -12275,37 +12231,6 @@ PrefabInstance:
       objectReference: {fileID: 1629121424}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99d88c1a48759744ea3eb8a790943ccc, type: 3}
---- !u!1 &883306742440783230 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1841754093, guid: 99d88c1a48759744ea3eb8a790943ccc,
-    type: 3}
-  m_PrefabInstance: {fileID: 883306742440783229}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &883306742440783231
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 883306742440783230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3037d0bbcc8a0ea4f80f62101af3bd7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationSpeed: 0.05
-  directionArrowAnimation:
-  - {fileID: -511678672852780879, guid: 80e0c89c48808064397c12145d3c929a, type: 3}
-  - {fileID: 5475792776702789241, guid: 80e0c89c48808064397c12145d3c929a, type: 3}
-  - {fileID: -7665901834611497040, guid: 80e0c89c48808064397c12145d3c929a, type: 3}
-  - {fileID: 8915524500994648093, guid: 80e0c89c48808064397c12145d3c929a, type: 3}
-  - {fileID: -415314402428884014, guid: 80e0c89c48808064397c12145d3c929a, type: 3}
-  - {fileID: 8759587751998259141, guid: 80e0c89c48808064397c12145d3c929a, type: 3}
-  - {fileID: -6028807605076338755, guid: 80e0c89c48808064397c12145d3c929a, type: 3}
-  - {fileID: -8361085729606388065, guid: 80e0c89c48808064397c12145d3c929a, type: 3}
-  - {fileID: 3008826406158006410, guid: 80e0c89c48808064397c12145d3c929a, type: 3}
-  - {fileID: -5846878229656279801, guid: 80e0c89c48808064397c12145d3c929a, type: 3}
-  - {fileID: -7845126408930814529, guid: 80e0c89c48808064397c12145d3c929a, type: 3}
 --- !u!1001 &4161108299455322872
 PrefabInstance:
   m_ObjectHideFlags: 0
