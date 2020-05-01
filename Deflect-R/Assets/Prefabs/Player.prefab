@@ -539,10 +539,10 @@ MonoBehaviour:
     m_Bits: 256
   deflectForce: {x: 25, y: 25}
   _minUsableFocus: 0.5
-  _focusBaseCost: 1
+  _focusBaseCost: 0.8
   _graceWindowTime: 0.5
   focusUsingRate: 1
-  focusRechargeRate: 5
+  focusRechargeRate: 4
   focusRechargeRateInAir: 0.5
   focusFillImage: {fileID: 0}
   normalDrag: 3
