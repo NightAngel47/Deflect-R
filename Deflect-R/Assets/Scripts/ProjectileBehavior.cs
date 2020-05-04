@@ -25,7 +25,7 @@ public class ProjectileBehavior : MonoBehaviour
         {
             _dashRadius = dashRadius;
         }
-        else if(other.CompareTag("Ground"))
+        else if(other.CompareTag("Ground") || other.CompareTag("Wall"))
         {
             Destroy(gameObject);
         }

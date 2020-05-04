@@ -12,6 +12,7 @@ TagManager:
   - Down Below
   - Forward
   - Backward
+  - Wall
   layers:
   - Default
   - TransparentFX

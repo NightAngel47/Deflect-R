@@ -111,14 +111,14 @@ public class GunController : MonoBehaviour
             bulletDirection = (gunPos - Vector3.back).normalized;
             ProjectileBehavior newBullet = Instantiate(bullet, gunPos - bulletDirection, Quaternion.identity).GetComponent<ProjectileBehavior>();
             newBullet.transform.Rotate(Vector3.forward, Vector3.SignedAngle(gunPos, bulletDirection, Vector3.forward) + 180);
-            newBullet.FireProjectile(-bulletDirection);
+            newBullet.FireProjectile(new Vector2(-1, 0));
         }
         else if (gameObject.tag == "Backward")
         {
             bulletDirection = (gunPos - Vector3.forward).normalized;
             ProjectileBehavior newBullet = Instantiate(bullet, gunPos - bulletDirection, Quaternion.identity).GetComponent<ProjectileBehavior>();
             newBullet.transform.Rotate(Vector3.forward, Vector3.SignedAngle(gunPos, bulletDirection, Vector3.forward));
-            newBullet.FireProjectile(bulletDirection);
+            newBullet.FireProjectile(new Vector2(1,0));
         }
         else if (gameObject.tag == "From Above")
         {
