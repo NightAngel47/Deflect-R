@@ -6773,7 +6773,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pausePanel: {fileID: 1517192696}
   isPaused: 0
-  levelToLoadOnRestart: Playtest_Level
+  levelToLoadOnRestart: Tutorial
   mainMenuSceneName: MainMenu
   playerBehaviour: {fileID: 0}
 --- !u!1001 &524401021
@@ -18613,7 +18613,7 @@ PrefabInstance:
     - target: {fileID: 5330288293311766289, guid: c399424ec0df1364ca426136267f0063,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1261.4336
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5330288293311766289, guid: c399424ec0df1364ca426136267f0063,
         type: 3}

@@ -212,7 +212,7 @@ PrefabInstance:
     - target: {fileID: 4161108299739625490, guid: 117f6dec81fd073498f586ec5f4a0f58,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 39.5
+      value: 37.5
       objectReference: {fileID: 0}
     - target: {fileID: 4161108299739625490, guid: 117f6dec81fd073498f586ec5f4a0f58,
         type: 3}
@@ -8812,7 +8812,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pausePanel: {fileID: 1517192696}
   isPaused: 0
-  levelToLoadOnRestart: Playtest_Level
+  levelToLoadOnRestart: David_Level
   mainMenuSceneName: MainMenu
   playerBehaviour: {fileID: 0}
 --- !u!4 &529794793 stripped
@@ -9196,7 +9196,7 @@ PrefabInstance:
     - target: {fileID: 5330288293311766289, guid: c399424ec0df1364ca426136267f0063,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1261.4336
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5330288293311766289, guid: c399424ec0df1364ca426136267f0063,
         type: 3}
@@ -9221,7 +9221,7 @@ PrefabInstance:
     - target: {fileID: 5330288293311766289, guid: c399424ec0df1364ca426136267f0063,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5330288293311766289, guid: c399424ec0df1364ca426136267f0063,
         type: 3}
