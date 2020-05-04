@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -353,14 +353,28 @@ MonoBehaviour:
   normalGravity: 1
   detectionZone: {fileID: 0}
   timeFreezeMaxDuration: 2
+  dashCooldown: 0
+  deflectXRange: 0.75
+  deflectYRange: 0.75
+  xForceMultiplier: 1.5
+  yForceMultiplier: 1.5
   undashableLayer:
     serializedVersion: 2
     m_Bits: 0
   deflectForce: {x: 15, y: 30}
+  _minUsableFocus: 0
+  _focusBaseCost: 0
+  _graceWindowTime: 0
+  focusUsingRate: 1
+  focusRechargeRate: 1
+  focusRechargeRateInAir: 0.25
+  focusFillImage: {fileID: 0}
   normalDrag: 5
   airDrag: 0
   xOffsetForCollider: 0.4
+  afterImage: {fileID: 0}
   deflectDirectionCircle: {fileID: 0}
+  pauseManager: {fileID: 0}
 --- !u!1001 &8635452776677871233
 PrefabInstance:
   m_ObjectHideFlags: 0
