@@ -16,6 +16,7 @@
           <e p="GunController.cs" t="Include" />
           <e p="ImageHandler.cs" t="Include" />
           <e p="MainMenuManager.cs" t="Include" />
+          <e p="NextSceneBehaviour.cs" t="Include" />
           <e p="PauseManager.cs" t="Include" />
           <e p="PlayerBehaviour.cs" t="Include" />
           <e p="ProjectileBehavior.cs" t="Include" />
