@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 5
+    OrthographicSize: 7
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 262b5de2c1fe2334bbfa47baf00f628d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sizeRange: {x: 5, y: 10}
+  sizeRange: {x: 7, y: 10}
   cam: {fileID: 8644729539703486619}
   player: {fileID: 0}
   expandSpeed: 0.025
