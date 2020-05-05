@@ -13,6 +13,7 @@ TagManager:
   - Forward
   - Backward
   - Wall
+  - Checkpoint
   layers:
   - Default
   - TransparentFX
