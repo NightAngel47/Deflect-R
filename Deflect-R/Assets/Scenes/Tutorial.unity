@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -19937,6 +19937,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 802298801, guid: 99d88c1a48759744ea3eb8a790943ccc, type: 3}
+      propertyPath: gameSounds.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 802298801, guid: 99d88c1a48759744ea3eb8a790943ccc, type: 3}
+      propertyPath: gameSounds.Array.data[7].soundName
+      value: Die
+      objectReference: {fileID: 0}
+    - target: {fileID: 802298801, guid: 99d88c1a48759744ea3eb8a790943ccc, type: 3}
+      propertyPath: gameSounds.Array.data[7].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7d9f8aab839fed043b2d3fbf99f0b25e, type: 3}
+    - target: {fileID: 802298801, guid: 99d88c1a48759744ea3eb8a790943ccc, type: 3}
+      propertyPath: gameSounds.Array.data[7].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 802298801, guid: 99d88c1a48759744ea3eb8a790943ccc, type: 3}
+      propertyPath: gameSounds.Array.data[7].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 802298801, guid: 99d88c1a48759744ea3eb8a790943ccc, type: 3}
+      propertyPath: gameSounds.Array.data[6].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 44ec5a67a7239324e8d9fe92bad870f9, type: 3}
     - target: {fileID: 883306742158301516, guid: 99d88c1a48759744ea3eb8a790943ccc,
         type: 3}
       propertyPath: m_Name
@@ -20007,6 +20031,11 @@ PrefabInstance:
       propertyPath: afterImage
       value: 
       objectReference: {fileID: 1629121424}
+    - target: {fileID: 5080836215505147859, guid: 99d88c1a48759744ea3eb8a790943ccc,
+        type: 3}
+      propertyPath: deathWoosh
+      value: 
+      objectReference: {fileID: 8300000, guid: 44ec5a67a7239324e8d9fe92bad870f9, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99d88c1a48759744ea3eb8a790943ccc, type: 3}
 --- !u!1001 &5136216642770042754

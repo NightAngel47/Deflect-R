@@ -27,7 +27,6 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField, Tooltip("Force to add to X vector when moving in greater X direction. ")] public float xForceMultiplier = 1.5f;
     [SerializeField, Tooltip("Force to add to Y vector when moving in greater X direction. ")] public float yForceMultiplier = 1.5f;
 
-
     // dash variables
     private DashRadius dashRadius;
     public LayerMask undashableLayer;
@@ -488,5 +487,6 @@ public class PlayerBehaviour : MonoBehaviour
     public void RespawnPlayerAtCheckpoint()
     {
         transform.position = _checkpoint.position;
+        AudioManager.instance.PlaySound("Die");
     }
 }
