@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -23658,7 +23658,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1934291485
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24925,6 +24925,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 802298801, guid: 99d88c1a48759744ea3eb8a790943ccc, type: 3}
+      propertyPath: gameSounds.Array.data[6].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 44ec5a67a7239324e8d9fe92bad870f9, type: 3}
     - target: {fileID: 883306742158301516, guid: 99d88c1a48759744ea3eb8a790943ccc,
         type: 3}
       propertyPath: m_Name
