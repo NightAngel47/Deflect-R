@@ -80,6 +80,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     public PauseManager pauseManager;
 
+    private Transform _checkpoint;
+
     void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -109,6 +111,7 @@ public class PlayerBehaviour : MonoBehaviour
         _currentFocusAmount = timeFreezeMaxDuration;
         focusFillImage.fillAmount = _currentFocusAmount / timeFreezeMaxDuration;
         focusFillImage.transform.parent.transform.parent.gameObject.SetActive(false);
+        _checkpoint = transform;
     }
     
 
@@ -472,13 +475,18 @@ public class PlayerBehaviour : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("OutOfBounds"))
-        { 
-            RestartLevel();   
+        {
+            RespawnPlayerAtCheckpoint();
+        }
+
+        if (collision.CompareTag("Checkpoint"))
+        {
+            _checkpoint = collision.transform;
         }
     }
 
-    private void RestartLevel()
+    public void RespawnPlayerAtCheckpoint()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        transform.position = _checkpoint.position;
     }
 }
