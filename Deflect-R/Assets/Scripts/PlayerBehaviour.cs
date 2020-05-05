@@ -476,7 +476,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (collision.CompareTag("OutOfBounds"))
         {
-            RespawnPlayerAtCheckpoint();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         if (collision.CompareTag("Checkpoint"))
